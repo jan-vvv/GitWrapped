@@ -1,0 +1,414 @@
+.wrapped-stats-screen {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #1e1738 0%,
+      #0c0b15 45%,
+      #050505 100%
+    );
+
+  color: var(--text);
+}
+
+/* Main retro computer window */
+
+.wrapped-stats-screen .terminal-window {
+  width: min(1050px, 100%);
+  min-height: 680px;
+
+  border: 2px solid var(--green);
+
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.015),
+      rgba(255, 255, 255, 0.015)
+    ),
+    rgba(3, 5, 5, 0.94);
+
+  box-shadow:
+    0 0 20px rgba(57, 255, 136, 0.18),
+    0 0 60px rgba(57, 255, 136, 0.06),
+    inset 0 0 50px rgba(57, 255, 136, 0.035);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Header */
+
+.wrapped-stats-screen .terminal-header {
+  height: 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px;
+
+  border-bottom: 2px solid var(--green);
+
+  background: rgba(57, 255, 136, 0.035);
+
+  color: var(--green);
+
+  font-size: 13px;
+
+  letter-spacing: 1px;
+}
+
+.wrapped-stats-screen .window-controls {
+  display: flex;
+  gap: 12px;
+
+  color: var(--green);
+}
+
+/* Main content */
+
+.wrapped-stats-content {
+  min-height: 636px;
+
+  padding: 44px 55px 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+}
+
+/* Tiny terminal status */
+
+.wrapped-stats-content .system-text {
+  align-self: flex-start;
+
+  color: var(--green);
+
+  font-size: 12px;
+  letter-spacing: 1.5px;
+
+  opacity: 0.8;
+}
+
+/* Heading */
+
+.wrapped-stats-content h2 {
+  margin-top: 48px;
+
+  color: var(--pink);
+
+  font-size: clamp(30px, 5vw, 58px);
+
+  font-weight: 700;
+
+  letter-spacing: 7px;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 8px rgba(255, 110, 199, 0.8),
+    0 0 22px rgba(255, 110, 199, 0.35);
+
+  animation: titleFlicker 5s steps(1) infinite;
+}
+
+/* Main repository number */
+
+.hero-stat {
+  margin-top: 34px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+}
+
+.hero-number {
+  color: var(--green);
+
+  font-family: inherit;
+
+  font-size: clamp(90px, 15vw, 155px);
+
+  font-weight: 700;
+
+  line-height: 0.8;
+
+  letter-spacing: -4px;
+
+  text-shadow:
+    0 0 8px rgba(57, 255, 136, 0.95),
+    0 0 25px rgba(57, 255, 136, 0.55),
+    0 0 55px rgba(57, 255, 136, 0.18);
+}
+
+.hero-label {
+  margin-top: 18px;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  letter-spacing: 6px;
+
+  text-transform: uppercase;
+}
+
+/* Three stat cards */
+
+.stats-grid {
+  width: min(780px, 100%);
+
+  margin-top: 42px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+}
+
+.stat-card {
+  min-height: 132px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid rgba(57, 255, 136, 0.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(57, 255, 136, 0.035),
+      rgba(255, 110, 199, 0.02)
+    );
+
+  box-shadow:
+    inset 0 0 20px rgba(57, 255, 136, 0.025);
+
+  position: relative;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--green);
+
+  box-shadow:
+    0 0 14px rgba(57, 255, 136, 0.15),
+    inset 0 0 20px rgba(57, 255, 136, 0.04);
+}
+
+.stat-icon {
+  color: var(--pink);
+
+  font-size: 18px;
+
+  text-shadow:
+    0 0 8px rgba(255, 110, 199, 0.6);
+}
+
+.stat-card strong {
+  margin-top: 9px;
+
+  color: var(--green);
+
+  font-size: clamp(18px, 2.5vw, 26px);
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 8px rgba(57, 255, 136, 0.35);
+}
+
+.stat-card span:last-child {
+  margin-top: 7px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+}
+
+/* Popular repository */
+
+.popular-repo {
+  width: min(780px, 100%);
+
+  margin-top: 18px;
+
+  padding: 18px 22px;
+
+  border: 1px solid rgba(255, 110, 199, 0.65);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 110, 199, 0.035),
+      rgba(139, 92, 246, 0.03),
+      rgba(255, 110, 199, 0.035)
+    );
+
+  position: relative;
+
+  text-align: center;
+}
+
+.popular-repo::before {
+  content: "★";
+
+  position: absolute;
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--pink);
+
+  opacity: 0.7;
+}
+
+.popular-repo::after {
+  content: "★";
+
+  position: absolute;
+  right: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--pink);
+
+  opacity: 0.7;
+}
+
+.repo-label {
+  color: var(--muted);
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+}
+
+.popular-repo h3 {
+  margin-top: 8px;
+
+  color: var(--pink);
+
+  font-size: 21px;
+
+  letter-spacing: 2px;
+
+  text-shadow:
+    0 0 8px rgba(255, 110, 199, 0.35);
+}
+
+.popular-repo p:last-child {
+  margin-top: 7px;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+}
+
+/* Footer */
+
+.wrapped-footer {
+  width: 100%;
+
+  margin-top: auto;
+  padding-top: 25px;
+
+  color: var(--green);
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  opacity: 0.55;
+
+  text-align: center;
+}
+
+/* Tiny retro flicker */
+
+@keyframes titleFlicker {
+  0%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+
+  97% {
+    opacity: 0.75;
+  }
+
+  98% {
+    opacity: 1;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 760px) {
+  .wrapped-stats-screen {
+    padding: 14px;
+  }
+
+  .wrapped-stats-screen .terminal-window {
+    min-height: calc(100vh - 28px);
+  }
+
+  .wrapped-stats-content {
+    min-height: calc(100vh - 74px);
+
+    padding: 30px 18px 24px;
+  }
+
+  .wrapped-stats-content h2 {
+    margin-top: 38px;
+
+    letter-spacing: 4px;
+  }
+
+  .hero-number {
+    font-size: clamp(80px, 25vw, 120px);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    min-height: 100px;
+  }
+
+  .popular-repo {
+    margin-top: 12px;
+  }
+}

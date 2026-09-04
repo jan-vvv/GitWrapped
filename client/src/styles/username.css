@@ -1,0 +1,162 @@
+.username-screen {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #171329 0%,
+      #080808 70%
+    );
+}
+
+.username-content {
+  min-height: 540px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+}
+
+.username-content h2 {
+  margin-top: 70px;
+
+  color: var(--green);
+
+  font-size: clamp(28px, 5vw, 52px);
+
+  letter-spacing: 5px;
+
+  text-shadow:
+    0 0 10px var(--green);
+}
+
+.username-description {
+  margin-top: 15px;
+
+  color: var(--muted);
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+.username-input-wrapper {
+  display: flex;
+  align-items: center;
+
+  width: min(420px, 90%);
+
+  margin-top: 45px;
+
+  border: 2px solid var(--green);
+
+  padding: 14px 18px;
+
+  color: var(--green);
+
+  box-shadow:
+    0 0 10px rgba(57, 255, 136, 0.15);
+}
+
+.username-input-wrapper span {
+  font-size: 18px;
+}
+
+.username-input-wrapper input {
+  flex: 1;
+
+  margin-left: 8px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--green);
+
+  font-family: inherit;
+
+  font-size: 18px;
+}
+
+.username-input-wrapper input::placeholder {
+  color: #555;
+}
+
+.username-content .start-button {
+  margin-top: 30px;
+}
+
+.debug-username {
+  margin-top: 15px;
+
+  color: var(--green);
+
+  font-size: 12px;
+  letter-spacing: 1px;
+
+  opacity: 0.7;
+}
+ /* github data*/ 
+ .username-error {
+  margin-top: 20px;
+
+  color: var(--pink);
+
+  font-size: 14px;
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 8px rgba(255, 110, 199, 0.5);
+}
+
+.github-result {
+  margin-top: 40px;
+
+  width: min(420px, 90%);
+
+  padding: 24px;
+
+  border: 2px solid var(--green);
+
+  text-align: center;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  box-shadow:
+    0 0 20px rgba(57, 255, 136, 0.15);
+}
+
+.github-avatar {
+  width: 90px;
+  height: 90px;
+
+  image-rendering: pixelated;
+
+  border: 2px solid var(--green);
+}
+
+.github-result h3 {
+  margin-top: 16px;
+
+  color: var(--green);
+
+  font-size: 22px;
+}
+
+.github-result p {
+  margin-top: 8px;
+
+  color: var(--muted);
+}
