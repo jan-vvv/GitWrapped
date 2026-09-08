@@ -1,6 +1,9 @@
 import "../styles/language.css";
 
+
+
 function LanguageScreen({ analytics, username, onNext }) {
+  
   return (
     <main className="language-screen crt-screen">
 

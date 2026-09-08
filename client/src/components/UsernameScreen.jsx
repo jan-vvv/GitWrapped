@@ -7,6 +7,7 @@ import AnalyzingScreen from "./AnalyzingScreen";
 import WrappedStatsScreen from "./WrappedStatsScreen";
 import LanguageScreen from "./LanguageScreen";
 import ActivityScreen from "./ActivityScreen";
+import LanguagePersonalityScreen from "./LanguagePersonalityScreen";
 
 function UsernameScreen() {
   const [username, setUsername] = useState("");
@@ -95,10 +96,20 @@ function UsernameScreen() {
     <LanguageScreen
       analytics={analytics}
       username={githubUser.login}
-      onNext={()=> setCurrentScreen("activity")}
+      onNext={()=> setCurrentScreen("languagePersonality")}
       />
   );
  }
+ if(currentScreen==="languagePersonality"){
+  return(
+    <LanguagePersonalityScreen
+      analytics={analytics}
+      username={githubUser.login}
+      onNext={()=> setCurrentScreen("activity")}
+    />
+  );
+}
+
  if(currentScreen ==="activity"){
   return(
     <ActivityScreen 

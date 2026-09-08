@@ -1,0 +1,163 @@
+.language-personality-screen {
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-personality-screen .terminal-window {
+  width: min(900px, 92vw);
+  min-height: 760px;
+}
+
+.language-personality-content {
+  min-height: 680px;
+  padding: 42px 50px 35px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.language-personality-content .system-text {
+  width: 100%;
+  text-align: left;
+  margin: 0 0 12px;
+}
+
+.card-number {
+  margin: 5px 0 55px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  opacity: 0.5;
+}
+
+.personality-eyebrow {
+  margin: 0 0 18px;
+
+  font-size: 12px;
+  letter-spacing: 5px;
+  opacity: 0.65;
+}
+
+.personality-language {
+  margin: 0;
+
+  font-size: clamp(70px, 12vw, 130px);
+  line-height: 0.9;
+  letter-spacing: 6px;
+
+  text-shadow:
+    0 0 8px currentColor,
+    0 0 25px currentColor,
+    0 0 55px currentColor;
+}
+
+.personality-divider {
+  margin: 30px 0;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.personality-title {
+  margin: 0;
+
+  font-size: clamp(28px, 5vw, 52px);
+  letter-spacing: 4px;
+
+  text-shadow:
+    0 0 8px currentColor,
+    0 0 22px currentColor;
+}
+
+.personality-vibe {
+  margin: 14px 0 22px;
+
+  font-size: 11px;
+  letter-spacing: 5px;
+  opacity: 0.65;
+}
+
+.personality-description {
+  max-width: 620px;
+
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 1px;
+
+  opacity: 0.85;
+}
+
+.personality-tags {
+  margin-top: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.personality-tags span {
+  padding: 8px 14px;
+
+  border: 1px solid currentColor;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.personality-footer {
+  margin-top: auto;
+  margin-bottom: 22px;
+
+  font-size: 11px;
+  letter-spacing: 4px;
+  opacity: 0.55;
+}
+
+.wrapped-next-button {
+  padding: 14px 30px;
+
+  background: transparent;
+  border: 1px solid currentColor;
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.wrapped-next-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 10px currentColor,
+    0 0 25px currentColor;
+}
+
+@media (max-width: 700px) {
+  .language-personality-screen {
+    padding: 15px;
+  }
+
+  .language-personality-content {
+    padding: 35px 20px 25px;
+  }
+
+  .personality-language {
+    letter-spacing: 3px;
+  }
+
+  .personality-title {
+    letter-spacing: 2px;
+  }
+}

@@ -2,14 +2,22 @@ const express = require("express");
 
 const {
   analyzeRepositories,
-  analyzeCodingHabits
+  analyzeActivity,
 } = require("../services/analysisService");
 
 const {
   getGithubUser,
   getGithubRepos,
-  getRepoCommits
 } = require("../services/githubService");
+
+const {
+  getContributionCalendar,
+} = require("../services/githubGraphqlService");
+
+const {
+  getLanguagePersonality,
+  getDeveloperPersonality,
+} = require("../services/personalityService");
 
 const router = express.Router();
 
@@ -19,55 +27,44 @@ router.post("/analyze", async (req, res) => {
 
     if (!username) {
       return res.status(400).json({
-        message: "GitHub username is required."
+        message: "GitHub username is required.",
       });
     }
 
-    // 1. Get GitHub profile
-    const githubUser = await getGithubUser(username);
+    // get GitHub profile
+    const githubUser =
+      await getGithubUser(username);
 
-    // 2. Get repositories
-    const githubRepos = await getGithubRepos(username);
+    // get repositories
+    const githubRepos =
+      await getGithubRepos(username);
 
-    // 3. Analyze repositories
-    const repositoryAnalysis = analyzeRepositories(githubRepos);
+    // analyze repositories
+    const repositoryAnalysis =
+      analyzeRepositories(githubRepos);
 
-    // 4. Pick the 5 most recently updated repositories
-    const recentRepos = [...githubRepos]
-      .sort(
-        (a, b) =>
-          new Date(b.pushed_at) - new Date(a.pushed_at)
-      )
-      .slice(0, 5);
+    // get contribution data from the last year
+    const contributionDays =
+      await getContributionCalendar(username);
 
-    // 5. Fetch commits from those repositories
-    const commitResults = [];
+    // analyze contribution activity
+    const activityAnalysis =
+      analyzeActivity(contributionDays);
 
-    for (const repo of recentRepos) {
-      try {
-        const commits = await getRepoCommits(
-          repo.owner.login,
-          repo.name
-        );
+    // generate language personality
+    const languagePersonality =
+      getLanguagePersonality(
+        repositoryAnalysis.topLanguage
+      );
 
-        commitResults.push({
-          repository: repo.name,
-          commits
-        });
+    //generate developer personality
+    const developerPersonality =
+      getDeveloperPersonality({
+        ...repositoryAnalysis,
+        ...activityAnalysis,
+      });
 
-      } catch (error) {
-        console.error(
-          `Could not fetch commits for ${repo.name}:`,
-          error.message
-        );
-      }
-    }
-
-    // 6. Analyze commit activity
-    const codingAnalysis =
-      analyzeCodingHabits(commitResults);
-
-    // 7. Send everything back to React
+    //send everything back to React
     res.json({
       message: "GitHub profile found!",
 
@@ -75,16 +72,22 @@ router.post("/analyze", async (req, res) => {
 
       analytics: {
         ...repositoryAnalysis,
-        ...codingAnalysis
-      }
+        ...activityAnalysis,
+        languagePersonality,
+        developerPersonality,
+      },
     });
 
   } catch (error) {
-    console.error("GitHub API error:", error);
+    console.error(
+      "GitHub API error:",
+      error
+    );
 
     res.status(500).json({
-      message: "Failed to fetch GitHub profile.",
-      error: error.message
+      message:
+        "Failed to fetch GitHub profile.",
+      error: error.message,
     });
   }
 });

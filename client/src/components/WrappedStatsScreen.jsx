@@ -1,15 +1,12 @@
 import "../styles/wrappedStats.css";
 
-function WrappedStatsScreen({ analytics, username,onNext }) {
-  const popularRepo = analytics.mostPopularRepository;
-
+function WrappedStatsScreen({ analytics, username, onNext }) {
   return (
     <main className="wrapped-stats-screen crt-screen">
-
       <div className="terminal-window">
 
         <div className="terminal-header">
-          <span>GITWRAPPED // DATA LOG</span>
+          <span>GITWRAPPED // CARD 02</span>
 
           <div className="window-controls">
             <span>_</span>
@@ -24,22 +21,40 @@ function WrappedStatsScreen({ analytics, username,onNext }) {
             &gt; ANALYSIS COMPLETE: @{username}
           </p>
 
-          <h2>YOUR YEAR IN CODE</h2>
+          <p className="card-number">
+            CARD 02 // THE RECEIPTS
+          </p>
 
-          <div className="hero-stat">
-            <span className="hero-number">
-              {analytics.repositoryCount}
+          <h2>
+            YOUR YEAR
+            <br />
+            IN CODE
+          </h2>
+
+          <div className="contribution-reveal">
+
+            <span className="contribution-number">
+              {analytics.totalContributions.toLocaleString()}
             </span>
 
-            <span className="hero-label">
-              REPOSITORIES
+            <span className="contribution-label">
+              CONTRIBUTIONS
             </span>
+
           </div>
 
-          <div className="stats-grid">
+          <p className="reveal-message">
+            You left your mark
+            <br />
+            across{" "}
+            <strong>{analytics.repositoryCount}</strong>{" "}
+            repositories.
+          </p>
 
-            <div className="stat-card">
-              <span className="stat-icon">★</span>
+          <div className="mini-stats">
+
+            <div className="mini-stat">
+              <span className="mini-icon">★</span>
 
               <strong>
                 {analytics.totalStars.toLocaleString()}
@@ -48,8 +63,8 @@ function WrappedStatsScreen({ analytics, username,onNext }) {
               <span>STARS</span>
             </div>
 
-            <div className="stat-card">
-              <span className="stat-icon">▲</span>
+            <div className="mini-stat">
+              <span className="mini-icon">▲</span>
 
               <strong>
                 {analytics.totalForks.toLocaleString()}
@@ -58,53 +73,31 @@ function WrappedStatsScreen({ analytics, username,onNext }) {
               <span>FORKS</span>
             </div>
 
-            <div className="stat-card">
-              <span className="stat-icon">◆</span>
+            <div className="mini-stat">
+              <span className="mini-icon">▣</span>
 
               <strong>
-                {analytics.topLanguage || "UNKNOWN"}
+                {analytics.repositoryCount}
               </strong>
 
-              <span>TOP LANGUAGE</span>
+              <span>REPOS</span>
             </div>
 
           </div>
 
-          {popularRepo && (
-            <div className="popular-repo">
-
-              <p className="repo-label">
-                &gt; MOST POPULAR REPOSITORY
-              </p>
-
-              <h3>
-                {popularRepo.name}
-              </h3>
-
-              <p>
-                ★ {popularRepo.stars.toLocaleString()}
-                {"   "}
-                ▲ {popularRepo.forks.toLocaleString()}
-              </p>
-
-            </div>
-          )}
-
           <p className="wrapped-footer">
-            &gt; DATA STREAM COMPLETE_
+            &gt; RECEIPTS LOADED_
           </p>
 
           <button
-  className="wrapped-next-button"
-  onClick={onNext}
->
-  [ CONTINUE → ]
-</button>
+            className="wrapped-next-button"
+            onClick={onNext}
+          >
+            [ CONTINUE → ]
+          </button>
 
         </div>
-
       </div>
-
     </main>
   );
 }

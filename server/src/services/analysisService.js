@@ -46,6 +46,8 @@ function analyzeRepositories(repositories) {
     )
   }))
   .sort((a,b)=> b.count -a.count);
+  const languageCount =
+  languageBreakdown.length;  
 
   const mostPopularRepository =
   [...repositories].sort(
@@ -62,12 +64,13 @@ const popularRepositoryData = mostPopularRepository
     }
   : null;
 
- return {
+return {
   repositoryCount,
   totalStars,
   totalForks,
   topLanguage,
   languageBreakdown,
+  languageCount,
   mostPopularRepository: popularRepositoryData
 };
 }
@@ -153,8 +156,113 @@ function analyzeCodingHabits(commitResults) {
   };
 }
 
+function calculateLongestStreak(contributionDays) {
+  const sortedDays = [...contributionDays].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  let currentStreak = 0;
+  let longestStreak = 0;
+
+  for (const day of sortedDays) {
+    if (day.contributionCount > 0) {
+      currentStreak++;
+
+      if (currentStreak > longestStreak) {
+        longestStreak = currentStreak;
+      }
+    } else {
+      currentStreak = 0;
+    }
+  }
+
+  return longestStreak;
+}
+function calculateCurrentStreak(contributionDays) {
+  const sortedDays = [...contributionDays].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  let currentStreak = 0;
+
+  for (const day of sortedDays) {
+    if (day.contributionCount > 0) {
+      currentStreak++;
+    } else {
+      break;
+    }
+  }
+
+  return currentStreak;
+}
+
+function analyzeActivity(contributionDays){
+  const totalContributions=contributionDays.reduce(
+    (total,day)=>total + day.contributionCount,
+    0
+  );
+  const activeDays = contributionDays.filter(
+    (day)=> day.contributionCount > 0 
+  ).length;
+
+  const consistencyScore = Math.round(
+    (activeDays/contributionDays.length)*100
+  );
+  const longestStreak = calculateLongestStreak(contributionDays);
+  const currentStreak = calculateCurrentStreak(contributionDays);
+
+  const dayCounts = {};
+
+  for( const day of contributionDays){
+    if( day.contributionCount == 0 ){
+      continue;
+    }
+
+    const date = new Date( day.date);
+    const dayOfWeek = date.getUTCDay();
+
+    dayCounts[dayOfWeek]=
+    (dayCounts[dayOfWeek] || 0)+
+    day.contributionCount;
+  }
+
+  let mostActiveDay = null;
+  let highestContributionCount = 0 ; 
+  
+  for( const day in dayCounts){
+    if(dayCounts[day] > highestContributionCount){
+      highestContributionCount = dayCounts[day];
+      mostActiveDay = Number(day);
+    }
+  }
+const dayNames = [
+"Sunday",
+"Monday",
+ "Tuesday",
+ "Wednesday",
+"Thursday",
+"Friday",
+  "Saturday",
+];
+
+return{
+   totalContributions,
+   activeDays, 
+   totalContributions,
+   longestStreak , 
+   currentStreak,
+   mostActiveDay:
+     mostActiveDay == null 
+       ? null 
+       :dayNames[mostActiveDay]
+};
+}
+
 
 module.exports = {
   analyzeRepositories,
-  analyzeCodingHabits
+  analyzeCodingHabits,
+  calculateLongestStreak,
+  calculateCurrentStreak,
+  analyzeActivity,
 };
