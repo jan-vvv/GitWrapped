@@ -19,6 +19,10 @@ const {
   getDeveloperPersonality,
 } = require("../services/personalityService");
 
+const {
+  generateAchievements,
+} = require("../services/achievementService");
+
 const router = express.Router();
 
 router.post("/analyze", async (req, res) => {
@@ -64,6 +68,12 @@ router.post("/analyze", async (req, res) => {
         ...activityAnalysis,
       });
 
+     const achievements =
+     generateAchievements({
+        ...repositoryAnalysis,
+        ...activityAnalysis,
+     });
+
     //send everything back to React
     res.json({
       message: "GitHub profile found!",
@@ -75,6 +85,7 @@ router.post("/analyze", async (req, res) => {
         ...activityAnalysis,
         languagePersonality,
         developerPersonality,
+        achievements,
       },
     });
 

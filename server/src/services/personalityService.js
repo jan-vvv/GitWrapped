@@ -373,21 +373,26 @@ function getDeveloperPersonality(analytics) {
     currentStreak,
     languageCount,
     consistencyScore,
+    mostActiveDay,
   } = analytics;
 
-  // 1. Extremely active developer
+  let personality;
+
+  // 1. GRIND MACHINE
   if (
     longestStreak >= 30 &&
     totalContributions >= 500
   ) {
-    return {
+    personality = {
       title: "THE GRIND MACHINE",
+      vibe: "LOCKED IN",
 
       description:
         "You didn't code this year. You clocked in.",
 
-      vibe: "LOCKED IN",
-
+      sentence:
+        "You are sentenced to one more commit.",
+      
       tags: [
         "Consistent",
         "Committed",
@@ -396,18 +401,20 @@ function getDeveloperPersonality(analytics) {
     };
   }
 
-  // 2. Consistent developer
-  if (
+  // 2. CONSISTENCY MACHINE
+  else if (
     consistencyScore >= 20 &&
     longestStreak >= 14
   ) {
-    return {
+    personality = {
       title: "THE CONSISTENCY MACHINE",
+      vibe: "STEADY POWER",
 
       description:
         "You don't need dramatic coding marathons. You just keep showing up.",
 
-      vibe: "STEADY POWER",
+      sentence:
+        "You are sentenced to maintaining the streak.",
 
       tags: [
         "Reliable",
@@ -417,18 +424,20 @@ function getDeveloperPersonality(analytics) {
     };
   }
 
-  // 3. Developer using many languages
-  if (
+  // 3. STACK COLLECTOR
+  else if (
     languageCount >= 4 &&
     totalContributions >= 20
   ) {
-    return {
+    personality = {
       title: "THE STACK COLLECTOR",
+      vibe: "POLYGLOT ENERGY",
 
       description:
         "You don't have a tech stack. You have a Pokémon collection.",
 
-      vibe: "POLYGLOT ENERGY",
+      sentence:
+        "You are sentenced to finishing one project before starting another.",
 
       tags: [
         "Curious",
@@ -438,44 +447,133 @@ function getDeveloperPersonality(analytics) {
     };
   }
 
-  // 4. Developer with many projects
-  if (
+  // 4. CHAOS ALCHEMIST
+  else if (
     repositoryCount >= 15 &&
     totalContributions >= 200
   ) {
-    return {
+    personality = {
       title: "THE CHAOS ALCHEMIST",
+      vibe: "CHAOTIC ENERGY",
 
       description:
         "You have projects inside projects. Somewhere in there is a masterpiece.",
 
-      vibe: "CHAOTIC ENERGY",
+      sentence:
+        "You are sentenced to organizing your repositories.",
 
       tags: [
         "Experimental",
         "Curious",
-        "14 unfinished tabs",
+        "Project hoarder",
       ],
     };
   }
 
-  // 5. Default personality
+  // 5. CODE EXPLORER
+  else {
+    personality = {
+      title: "THE CODE EXPLORER",
+      vibe: "EXPLORATION MODE",
+
+      description:
+        "You're still figuring out your developer identity. Honestly? That's half the fun.",
+
+      sentence:
+        "You are sentenced to keep experimenting.",
+
+      tags: [
+        "Curious",
+        "Learning",
+        "In progress",
+      ],
+    };
+  }
+
+  // -----------------------------
+  // BUILD THE TRIBUNAL CHARGES
+  // -----------------------------
+
+  const charges = [];
+
+  // Charge 1: language hoarding
+  if (languageCount >= 4) {
+    charges.push({
+      title: "TECHNOLOGY HOARDING",
+      description:
+        `${languageCount} languages detected. The defendant has refused to choose a stack.`,
+    });
+  }
+
+  // Charge 2: repository spawning
+  if (repositoryCount >= 5) {
+    charges.push({
+      title: "REPOSITORY SPAWNING",
+      description:
+        `${repositoryCount} repositories discovered. Authorities suspect "one more project" syndrome.`,
+    });
+  }
+
+  // Charge 3: consistency
+  if (consistencyScore < 10) {
+    charges.push({
+      title: "DISAPPEARING ACT",
+      description:
+        `${consistencyScore}% consistency detected. The defendant appears periodically.`,
+    });
+  } else if (consistencyScore >= 20) {
+    charges.push({
+      title: "STREAK ABUSE",
+      description:
+        `${consistencyScore}% consistency recorded. The defendant keeps coming back.`,
+    });
+  } else {
+    charges.push({
+      title: "CASUAL CODING",
+      description:
+        `${consistencyScore}% consistency recorded. Presence: occasional.`,
+    });
+  }
+
+  // Charge 4: streak
+  if (longestStreak >= 30) {
+    charges.push({
+      title: "EXTREME STREAK BEHAVIOR",
+      description:
+        `${longestStreak} consecutive days. Please remember the outside world exists.`,
+    });
+  } else if (longestStreak >= 7) {
+    charges.push({
+      title: "STREAK ACTIVITY",
+      description:
+        `${longestStreak} days in a row. The combo was getting serious.`,
+    });
+  } else {
+    charges.push({
+      title: "SHORT-TERM COMMITMENT",
+      description:
+        `${longestStreak} day longest streak. The combo barely had time to begin.`,
+    });
+  }
+
+  // Charge 5: favorite day
+  if (mostActiveDay) {
+    charges.push({
+      title: `${mostActiveDay.toUpperCase()} BEHAVIOR`,
+      description:
+        `Peak activity detected on ${mostActiveDay}. The evidence is suspicious.`,
+    });
+  }
+
+  // We only want 3 charges on the actual card
+  const selectedCharges = charges.slice(0, 3);
+
   return {
-    title: "THE CODE EXPLORER",
-
-    description:
-      "You're still figuring out your developer identity. Honestly? That's half the fun.",
-
-    vibe: "EXPLORATION MODE",
-
-    tags: [
-      "Curious",
-      "Learning",
-      "In progress",
-    ],
+    ...personality,
+    charges: selectedCharges,
+    verdict: "GUILTY",
   };
 }
-
 
 module.exports = {
   getLanguagePersonality,

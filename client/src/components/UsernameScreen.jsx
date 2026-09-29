@@ -8,6 +8,9 @@ import WrappedStatsScreen from "./WrappedStatsScreen";
 import LanguageScreen from "./LanguageScreen";
 import ActivityScreen from "./ActivityScreen";
 import LanguagePersonalityScreen from "./LanguagePersonalityScreen";
+import RewardProtocolScreen from "./RewardProtocolScreen";
+import TribunalScreen from "./TribunalScreen";
+import AchievementsScreen from "./AchievementsScreen";
 
 function UsernameScreen() {
   const [username, setUsername] = useState("");
@@ -110,14 +113,48 @@ function UsernameScreen() {
   );
 }
 
- if(currentScreen ==="activity"){
-  return(
-    <ActivityScreen 
+if (currentScreen === "activity") {
+  return (
+    <ActivityScreen
       analytics={analytics}
       username={githubUser.login}
-      />
+      onNext={() => setCurrentScreen("tribunal")}
+    />
   );
- }
+}
+
+if (currentScreen === "tribunal") {
+  return (
+    <TribunalScreen
+      analytics={analytics}
+      username={githubUser.login}
+      onNext={() =>
+        setCurrentScreen("rewardProtocol")
+      }
+    />
+  );
+}
+if (currentScreen === "rewardProtocol") {
+  return (
+    <RewardProtocolScreen
+      analytics={analytics}
+      onComplete={() =>
+        setCurrentScreen("achievements")
+      }
+    />
+  );
+}
+if (currentScreen === "achievements") {
+  return (
+    <AchievementsScreen
+      analytics={analytics}
+      username={githubUser.login}
+      onNext={() =>
+        setCurrentScreen("final")
+      }
+    />
+  );
+}
 
   return (
     <main className="username-screen crt-screen">

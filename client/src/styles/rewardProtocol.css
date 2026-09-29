@@ -1,0 +1,114 @@
+.reward-protocol-screen {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px;
+}
+
+.reward-protocol-content {
+  width: min(800px, 90vw);
+
+  min-height: 600px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: left;
+}
+
+.reward-label {
+  margin-bottom: 40px;
+
+  font-size: 11px;
+  letter-spacing: 4px;
+
+  opacity: 0.55;
+}
+
+.reward-log {
+  width: min(650px, 100%);
+}
+
+.reward-log p {
+  margin: 14px 0;
+
+  font-size: 14px;
+  letter-spacing: 2px;
+
+  animation: rewardFadeIn 0.3s ease;
+}
+
+.achievement-detected {
+  margin-top: 55px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  animation: achievementReveal 0.7s ease;
+}
+
+.achievement-detected span {
+  font-size: 11px;
+  letter-spacing: 4px;
+
+  opacity: 0.6;
+}
+
+.achievement-detected strong {
+  margin: 18px 0;
+
+  font-size: clamp(60px, 10vw, 110px);
+
+  line-height: 0.9;
+
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 25px currentColor,
+    0 0 50px currentColor;
+}
+
+@keyframes rewardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes achievementReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .reward-protocol-screen {
+    padding: 15px;
+  }
+
+  .reward-protocol-content {
+    min-height: 500px;
+  }
+
+  .reward-log p {
+    font-size: 12px;
+  }
+}
