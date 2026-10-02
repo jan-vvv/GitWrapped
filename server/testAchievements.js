@@ -1,29 +1,23 @@
 const {
-  generateAchievements,
-} = require("./src/services/achievementService");
+  generateFinalRoast,
+} = require("./src/services/roastService");
 
 function main() {
   const analytics = {
-    totalContributions: 26,
-    activeDays: 18,
-    consistencyScore: 5,
-    longestStreak: 4,
-    currentStreak: 0,
-    languageCount: 4,
     repositoryCount: 8,
-    totalStars: 0,
+    totalContributions: 26,
+    languageCount: 4,
+    longestStreak: 4,
+    consistencyScore: 5,
+    currentStreak: 0,
     mostActiveDay: "Friday",
   };
 
-  const achievements =
-    generateAchievements(analytics);
+  const result =
+    generateFinalRoast(analytics);
 
   console.log(
-    JSON.stringify(
-      achievements,
-      null,
-      2
-    )
+    JSON.stringify(result, null, 2)
   );
 }
 

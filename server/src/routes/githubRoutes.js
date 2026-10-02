@@ -1,5 +1,8 @@
 const express = require("express");
 
+const { randomBytes } = require("node:crypto");
+const Wrapped = require( "../models/Wrapped");
+
 const {
   analyzeRepositories,
   analyzeActivity,
@@ -22,6 +25,10 @@ const {
 const {
   generateAchievements,
 } = require("../services/achievementService");
+
+const {
+  generateFinalRoast,
+} = require("../services/roastService");
 
 const router = express.Router();
 
@@ -74,11 +81,43 @@ router.post("/analyze", async (req, res) => {
         ...activityAnalysis,
      });
 
+     const finalRoast =
+       generateFinalRoast({
+        ...repositoryAnalysis,
+        ...activityAnalysis,
+    });
+
     //send everything back to React
+const shareId =
+  "gw_" + randomBytes(6).toString("hex");
+
+  const savedWrapped = await Wrapped.create({
+  shareId,
+
+  githubUsername: githubUser.login,
+
+  githubUserId: githubUser.id,
+
+  githubAvatarUrl: githubUser.avatar_url,
+
+  analytics: {
+    ...repositoryAnalysis,
+    ...activityAnalysis,
+  },
+
+  languagePersonality,
+
+  developerPersonality,
+
+  achievements,
+
+  finalRoast,
+});
     res.json({
       message: "GitHub profile found!",
 
       user: githubUser,
+      shareId,
 
       analytics: {
         ...repositoryAnalysis,
@@ -86,6 +125,7 @@ router.post("/analyze", async (req, res) => {
         languagePersonality,
         developerPersonality,
         achievements,
+        finalRoast,
       },
     });
 

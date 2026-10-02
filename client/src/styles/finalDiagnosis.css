@@ -1,0 +1,210 @@
+.final-diagnosis-screen {
+  min-height: 100vh;
+  padding: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.final-diagnosis-screen .terminal-window {
+  width: min(900px, 94vw);
+  min-height: 760px;
+}
+
+.final-diagnosis-content {
+  min-height: 680px;
+  padding: 40px 45px 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.final-diagnosis-content .system-text {
+  width: 100%;
+  text-align: left;
+  margin: 0 0 10px;
+}
+
+.card-number {
+  margin: 5px 0 35px;
+
+  font-size: 10px;
+  letter-spacing: 4px;
+
+  opacity: 0.5;
+}
+
+.diagnosis-eyebrow {
+  margin: 0 0 18px;
+
+  font-size: 11px;
+  letter-spacing: 4px;
+
+  opacity: 0.6;
+}
+
+.diagnosis-title {
+  margin: 0;
+
+  max-width: 800px;
+
+  font-size: clamp(38px, 7vw, 78px);
+  line-height: 0.95;
+
+  letter-spacing: 5px;
+
+  text-shadow:
+    0 0 8px currentColor,
+    0 0 25px currentColor,
+    0 0 50px currentColor;
+}
+
+.diagnosis-vibe {
+  margin: 16px 0 25px;
+
+  font-size: 10px;
+  letter-spacing: 5px;
+
+  opacity: 0.6;
+}
+
+.diagnosis-evidence {
+  width: min(650px, 100%);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 24px;
+}
+
+.diagnosis-evidence div {
+  padding: 16px 10px;
+
+  border: 1px solid currentColor;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.diagnosis-evidence strong {
+  font-size: 28px;
+
+  text-shadow:
+    0 0 8px currentColor;
+}
+
+.diagnosis-evidence span {
+  font-size: 9px;
+  letter-spacing: 2px;
+
+  opacity: 0.55;
+}
+
+.diagnosis-message {
+  width: min(650px, 100%);
+
+  padding: 18px 22px;
+
+  border: 1px solid currentColor;
+}
+
+.diagnosis-message p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  opacity: 0.85;
+}
+
+.final-roast {
+  width: min(650px, 100%);
+
+  margin-top: 15px;
+  padding: 18px 22px;
+
+  border: 1px solid currentColor;
+
+  text-align: left;
+}
+
+.final-roast span {
+  font-size: 9px;
+  letter-spacing: 3px;
+
+  opacity: 0.55;
+}
+
+.final-roast p {
+  margin: 10px 0 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.diagnosis-closing {
+  max-width: 600px;
+
+  margin: 18px 0 0;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  opacity: 0.7;
+}
+
+.diagnosis-footer {
+  margin-top: auto;
+  margin-bottom: 18px;
+
+  font-size: 10px;
+  letter-spacing: 4px;
+
+  opacity: 0.5;
+}
+
+.wrapped-next-button {
+  padding: 14px 30px;
+
+  background: transparent;
+  border: 1px solid currentColor;
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+}
+
+.wrapped-next-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 10px currentColor,
+    0 0 25px currentColor;
+}
+
+@media (max-width: 700px) {
+  .final-diagnosis-screen {
+    padding: 12px;
+  }
+
+  .final-diagnosis-content {
+    padding: 30px 18px 22px;
+  }
+
+  .diagnosis-evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnosis-title {
+    letter-spacing: 2px;
+  }
+}

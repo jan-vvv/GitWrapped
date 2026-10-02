@@ -11,6 +11,8 @@ import LanguagePersonalityScreen from "./LanguagePersonalityScreen";
 import RewardProtocolScreen from "./RewardProtocolScreen";
 import TribunalScreen from "./TribunalScreen";
 import AchievementsScreen from "./AchievementsScreen";
+import FinalDiagnosisScreen from "./FinalDiagnosisScreen";
+import FinalWrappedScreen from "./FinalWrappedScreen";
 
 function UsernameScreen() {
   const [username, setUsername] = useState("");
@@ -18,9 +20,9 @@ function UsernameScreen() {
   const [githubUser, setGithubUser] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [error, setError] = useState("");
-  
-  const [currentScreen , setCurrentScreen]= useState("username");
 
+  const [currentScreen, setCurrentScreen] = useState("username");
+  const [shareId, setShareId] = useState("");
   useEffect(() => {
     if (currentScreen !== "analyzing") {
       return;
@@ -43,126 +45,124 @@ function UsernameScreen() {
     setError("");
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/github/analyze",
-        {
-          method: "POST",
+      const response = await fetch("http://localhost:5000/api/github/analyze", {
+        method: "POST",
 
-          headers: {
-            "Content-Type": "application/json"
-          },
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-          body: JSON.stringify({
-            username: username.trim()
-          })
-        }
-      );
+        body: JSON.stringify({
+          username: username.trim(),
+        }),
+      });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(
-          data.message || "Something went wrong."
-        );
+        throw new Error(data.message || "Something went wrong.");
       }
 
       setGithubUser(data.user);
       setAnalytics(data.analytics);
+      setShareId(data.shareId);
       setCurrentScreen("analyzing");
-
     } catch (error) {
       setError(error.message);
-
     } finally {
       setLoading(false);
     }
   }
 
- if(currentScreen ==="analyzing"){
-  return(
-    <AnalyzingScreen
-    username={githubUser.login}
-    />
-  );
- }
- if(currentScreen==="stats"){
-  return(
-    <WrappedStatsScreen
-    analytics={analytics}
-    username={githubUser.login}
-    onNext={()=> setCurrentScreen("language")}
-    />
-  );
- }
- if(currentScreen ==="language"){
-  return(
-    <LanguageScreen
-      analytics={analytics}
-      username={githubUser.login}
-      onNext={()=> setCurrentScreen("languagePersonality")}
+  if (currentScreen === "analyzing") {
+    return <AnalyzingScreen username={githubUser.login} />;
+  }
+  if (currentScreen === "stats") {
+    return (
+      <WrappedStatsScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("language")}
       />
-  );
- }
- if(currentScreen==="languagePersonality"){
-  return(
-    <LanguagePersonalityScreen
-      analytics={analytics}
-      username={githubUser.login}
-      onNext={()=> setCurrentScreen("activity")}
-    />
-  );
-}
+    );
+  }
+  if (currentScreen === "language") {
+    return (
+      <LanguageScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("languagePersonality")}
+      />
+    );
+  }
+  if (currentScreen === "languagePersonality") {
+    return (
+      <LanguagePersonalityScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("activity")}
+      />
+    );
+  }
 
-if (currentScreen === "activity") {
-  return (
-    <ActivityScreen
-      analytics={analytics}
-      username={githubUser.login}
-      onNext={() => setCurrentScreen("tribunal")}
-    />
-  );
-}
+  if (currentScreen === "activity") {
+    return (
+      <ActivityScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("tribunal")}
+      />
+    );
+  }
 
-if (currentScreen === "tribunal") {
+  if (currentScreen === "tribunal") {
+    return (
+      <TribunalScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("rewardProtocol")}
+      />
+    );
+  }
+  if (currentScreen === "rewardProtocol") {
+    return (
+      <RewardProtocolScreen
+        analytics={analytics}
+        onComplete={() => setCurrentScreen("achievements")}
+      />
+    );
+  }
+  if (currentScreen === "achievements") {
+    return (
+      <AchievementsScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("finalDiagnosis")}
+      />
+    );
+  }
+  if (currentScreen === "finalDiagnosis") {
+    return (
+      <FinalDiagnosisScreen
+        analytics={analytics}
+        username={githubUser.login}
+        onNext={() => setCurrentScreen("finalWrapped")}
+      />
+    );
+  }
+  if (currentScreen === "finalWrapped") {
   return (
-    <TribunalScreen
+    <FinalWrappedScreen
       analytics={analytics}
       username={githubUser.login}
-      onNext={() =>
-        setCurrentScreen("rewardProtocol")
-      }
+      shareId={shareId}
     />
   );
 }
-if (currentScreen === "rewardProtocol") {
-  return (
-    <RewardProtocolScreen
-      analytics={analytics}
-      onComplete={() =>
-        setCurrentScreen("achievements")
-      }
-    />
-  );
-}
-if (currentScreen === "achievements") {
-  return (
-    <AchievementsScreen
-      analytics={analytics}
-      username={githubUser.login}
-      onNext={() =>
-        setCurrentScreen("final")
-      }
-    />
-  );
-}
-
   return (
     <main className="username-screen crt-screen">
-
       <div className="terminal-window">
-
         <div className="terminal-header">
-
           <span>GITWRAPPED_OS v1.0</span>
 
           <div className="window-controls">
@@ -170,14 +170,10 @@ if (currentScreen === "achievements") {
             <span>□</span>
             <span>×</span>
           </div>
-
         </div>
 
         <div className="username-content">
-
-          <p className="system-text">
-            &gt; SYSTEM READY
-          </p>
+          <p className="system-text">&gt; SYSTEM READY</p>
 
           <h2>IDENTIFY YOURSELF</h2>
 
@@ -186,18 +182,14 @@ if (currentScreen === "achievements") {
           </p>
 
           <div className="username-input-wrapper">
-
             <span>@</span>
 
             <input
               type="text"
               placeholder="github_username"
               value={username}
-              onChange={(event) =>
-                setUsername(event.target.value)
-              }
+              onChange={(event) => setUsername(event.target.value)}
             />
-
           </div>
 
           <button
@@ -205,42 +197,26 @@ if (currentScreen === "achievements") {
             onClick={handleContinue}
             disabled={loading}
           >
-            {loading
-              ? "[ CONNECTING... ]"
-              : "[ CONTINUE ]"}
+            {loading ? "[ CONNECTING... ]" : "[ CONTINUE ]"}
           </button>
 
-          {error && (
-            <p className="username-error">
-              &gt; {error}
-            </p>
-          )}
+          {error && <p className="username-error">&gt; {error}</p>}
 
           {githubUser && (
             <div className="github-result">
-
               <img
                 src={githubUser.avatar_url}
                 alt={githubUser.login}
                 className="github-avatar"
               />
 
-              <h3>
-                {githubUser.name || githubUser.login}
-              </h3>
+              <h3>{githubUser.name || githubUser.login}</h3>
 
-              <p>
-                @{githubUser.login}
-              </p>
+              <p>@{githubUser.login}</p>
 
-              <p>
-                {githubUser.public_repos} public repositories
-              </p>
+              <p>{githubUser.public_repos} public repositories</p>
 
-              <p>
-                {githubUser.followers} followers
-              </p>
-
+              <p>{githubUser.followers} followers</p>
             </div>
           )}
 
@@ -249,11 +225,8 @@ if (currentScreen === "achievements") {
               ? "> GITHUB PROFILE VERIFIED"
               : "> GITHUB PROFILE REQUIRED"}
           </p>
-
         </div>
-
       </div>
-
     </main>
   );
 }
