@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/boot.css";
 import "../styles/username.css";
 
+import YearIntroScreen from "./YearIntroScreen";
 import AnalyzingScreen from "./AnalyzingScreen";
 import WrappedStatsScreen from "./WrappedStatsScreen";
 import LanguageScreen from "./LanguageScreen";
@@ -29,7 +30,7 @@ function UsernameScreen() {
     }
 
     const timer = setTimeout(() => {
-      setCurrentScreen("stats");
+      setCurrentScreen("yearIntro");
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -77,6 +78,13 @@ function UsernameScreen() {
   if (currentScreen === "analyzing") {
     return <AnalyzingScreen username={githubUser.login} />;
   }
+  if (currentScreen === "yearIntro") {
+  return (
+    <YearIntroScreen
+      onNext={() => setCurrentScreen("stats")}
+    />
+  );
+}
   if (currentScreen === "stats") {
     return (
       <WrappedStatsScreen

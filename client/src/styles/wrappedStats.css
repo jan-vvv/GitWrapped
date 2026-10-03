@@ -1,163 +1,690 @@
-.wrapped-stats-screen {
-  min-height: 100vh;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.contributions-screen {
+  position: fixed;
+  inset: 0;
 
-.wrapped-stats-screen .terminal-window {
-  width: min(900px, 92vw);
-  min-height: 760px;
-}
-
-.wrapped-stats-content {
-  min-height: 680px;
-  padding: 42px 50px 35px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.system-text {
   width: 100%;
-  text-align: left;
-  margin: 0 0 12px;
-  font-size: 14px;
-  letter-spacing: 1px;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background: #6657ff;
+
+  color: #111014;
+
+  cursor: pointer;
+
+  isolation: isolate;
 }
 
-.card-number {
-  margin: 5px 0 28px;
-  font-size: 11px;
-  letter-spacing: 4px;
-  opacity: 0.55;
+/* ----------------------------------------
+   TEXTURE
+---------------------------------------- */
+
+.contributions-grain {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.1;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.04) 0px,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  z-index: 20;
 }
 
-.wrapped-stats-content h2 {
-  margin: 0;
-  font-size: clamp(42px, 7vw, 78px);
-  line-height: 0.95;
-  letter-spacing: 8px;
-  text-align: center;
+/* ----------------------------------------
+   LARGE BACKGROUND CIRCLE
+---------------------------------------- */
+
+.contribution-circle {
+  position: absolute;
+
+  width: 62vw;
+  height: 62vw;
+
+  min-width: 500px;
+  min-height: 500px;
+
+  top: -24vw;
+  right: -18vw;
+
+  border-radius: 50%;
+
+  background: #b7f000;
+
+  border: 4px solid #111014;
+
+  z-index: 1;
+
+  animation:
+    contributionCircle 9s ease-in-out infinite
+    alternate;
 }
 
-.contribution-reveal {
-  margin-top: 38px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ----------------------------------------
+   PINK BLOCK
+---------------------------------------- */
+
+.contribution-pink-block {
+  position: absolute;
+
+  width: 24vw;
+  height: 24vw;
+
+  min-width: 230px;
+  min-height: 230px;
+
+  bottom: -8vw;
+  left: -6vw;
+
+  background: #ff4fa3;
+
+  border: 4px solid #111014;
+
+  transform: rotate(-18deg);
+
+  z-index: 2;
+
+  animation:
+    contributionBlock 7s ease-in-out infinite
+    alternate;
 }
 
-.contribution-number {
-  font-size: clamp(90px, 15vw, 170px);
-  line-height: 0.85;
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-shadow:
-    0 0 8px currentColor,
-    0 0 25px currentColor,
-    0 0 50px currentColor;
+/* ----------------------------------------
+   GRID DETAIL
+---------------------------------------- */
+
+.contribution-grid {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: 8vw;
+  bottom: 8vh;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(17, 16, 20, 0.8) 2px,
+      transparent 2px
+    ),
+    linear-gradient(
+      rgba(17, 16, 20, 0.8) 2px,
+      transparent 2px
+    );
+
+  background-size: 24px 24px;
+
+  transform: rotate(8deg);
+
+  opacity: 0.5;
+
+  z-index: 3;
 }
 
-.contribution-label {
-  margin-top: 16px;
-  font-size: 14px;
-  letter-spacing: 7px;
-  opacity: 0.75;
+/* ----------------------------------------
+   ORBITS
+---------------------------------------- */
+
+.contribution-orbit {
+  position: absolute;
+
+  border: 4px solid #ff4fa3;
+
+  border-radius: 50%;
+
+  z-index: 2;
+
+  pointer-events: none;
 }
 
-.reveal-message {
-  margin: 30px 0 34px;
-  font-size: 16px;
-  line-height: 1.7;
-  letter-spacing: 2px;
-  opacity: 0.8;
+.contribution-orbit-one {
+  width: 58vw;
+  height: 18vw;
+
+  min-width: 520px;
+  min-height: 160px;
+
+  left: -15vw;
+  top: 14vh;
+
+  transform: rotate(-20deg);
+
+  animation:
+    contributionOrbitOne 10s ease-in-out infinite
+    alternate;
 }
 
-.reveal-message strong {
-  font-size: 20px;
+.contribution-orbit-two {
+  width: 45vw;
+  height: 15vw;
+
+  min-width: 400px;
+  min-height: 130px;
+
+  right: -12vw;
+  bottom: 15vh;
+
+  border-color: #b7f000;
+
+  transform: rotate(19deg);
+
+  animation:
+    contributionOrbitTwo 8s ease-in-out infinite
+    alternate;
 }
 
-.mini-stats {
-  width: 100%;
-  max-width: 680px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
+/* ----------------------------------------
+   METADATA
+---------------------------------------- */
 
-.mini-stat {
-  border: 1px solid rgba(0, 255, 140, 0.55);
-  padding: 18px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  background: rgba(0, 255, 140, 0.025);
-}
+.contribution-meta {
+  position: absolute;
 
-.mini-icon {
-  font-size: 16px;
-  opacity: 0.9;
-}
+  z-index: 30;
 
-.mini-stat strong {
-  font-size: 23px;
-  letter-spacing: 1px;
-}
+  font-family:
+    "Courier New",
+    monospace;
 
-.mini-stat span:last-child {
   font-size: 10px;
-  letter-spacing: 4px;
-  opacity: 0.65;
+
+  font-weight: bold;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
 }
 
-.wrapped-footer {
-  margin-top: auto;
-  margin-bottom: 22px;
-  font-size: 11px;
-  letter-spacing: 4px;
+.contribution-meta.top {
+  top: 28px;
+  left: 34px;
+}
+
+.contribution-meta.side {
+  right: 30px;
+  top: 50%;
+
+  writing-mode: vertical-rl;
+
+  transform: translateY(-50%);
+
   opacity: 0.6;
 }
 
-.wrapped-next-button {
-  padding: 14px 30px;
-  background: transparent;
-  border: 1px solid currentColor;
-  font-family: inherit;
-  font-size: 14px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: 0.2s ease;
+/* ----------------------------------------
+   MAIN CONTENT
+---------------------------------------- */
+
+.contribution-content {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(80vw, 1050px);
+
+  transform:
+    translate(-50%, -50%)
+    rotate(1deg);
+
+  text-align: center;
 }
 
-.wrapped-next-button:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 10px currentColor,
-    0 0 25px currentColor;
+/* ----------------------------------------
+   LABEL
+---------------------------------------- */
+
+.contribution-label {
+  margin: 0;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: clamp(10px, 1.1vw, 14px);
+
+  font-weight: bold;
+
+  letter-spacing: 0.3em;
+
+  text-transform: uppercase;
 }
+
+/* ----------------------------------------
+   HUGE NUMBER
+---------------------------------------- */
+
+.contribution-number-wrap {
+  position: relative;
+
+  display: inline-block;
+
+  margin-top: 8px;
+}
+
+.contribution-number {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+
+  font-family:
+    Arial Black,
+    Impact,
+    sans-serif;
+
+  font-size: clamp(
+    150px,
+    23vw,
+    330px
+  );
+
+  line-height: 0.78;
+
+  font-weight: 950;
+
+  letter-spacing: -0.09em;
+
+  color: #ff4fa3;
+
+  -webkit-text-stroke: 5px #111014;
+
+  text-shadow:
+    12px 12px 0 #b7f000;
+
+  animation:
+    contributionNumberIn
+    1200ms
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+.contribution-number-shadow {
+  position: absolute;
+
+  left: 12px;
+  top: 12px;
+
+  z-index: 1;
+
+  font-family:
+    Arial Black,
+    Impact,
+    sans-serif;
+
+  font-size: clamp(
+    150px,
+    23vw,
+    330px
+  );
+
+  line-height: 0.78;
+
+  letter-spacing: -0.09em;
+
+  color: #111014;
+
+  opacity: 0.9;
+}
+
+/* ----------------------------------------
+   TITLE
+---------------------------------------- */
+
+.contribution-title {
+  margin: 15px 0 0;
+
+  font-family:
+    Arial Black,
+    Impact,
+    sans-serif;
+
+  font-size: clamp(
+    30px,
+    4vw,
+    62px
+  );
+
+  line-height: 0.9;
+
+  letter-spacing: -0.055em;
+
+  color: #f4f0e6;
+
+  -webkit-text-stroke: 2px #111014;
+
+  text-transform: uppercase;
+}
+
+/* ----------------------------------------
+   RULE
+---------------------------------------- */
+
+.contribution-rule {
+  width: 150px;
+  height: 8px;
+
+  margin: 24px auto;
+
+  background: #b7f000;
+
+  transform: rotate(-2deg);
+}
+
+/* ----------------------------------------
+   ROAST
+---------------------------------------- */
+
+.contribution-roast {
+  display: inline-block;
+
+  margin: 0;
+
+  padding: 12px 18px;
+
+  background: #f4f0e6;
+
+  border: 3px solid #111014;
+
+  box-shadow:
+    7px 7px 0 #111014;
+
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size: clamp(
+    13px,
+    1.4vw,
+    18px
+  );
+
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+
+  transform: rotate(-2deg);
+
+  animation:
+    roastIn 700ms
+    1100ms
+    cubic-bezier(.16,1,.3,1)
+    both;
+}
+
+/* ----------------------------------------
+   SYSTEM DETAIL
+---------------------------------------- */
+
+.contribution-system {
+  position: absolute;
+
+  left: 34px;
+  bottom: 28px;
+
+  z-index: 30;
+
+  display: flex;
+  gap: 18px;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.12em;
+}
+
+.contribution-system span:last-child {
+  opacity: 0.55;
+}
+
+/* ----------------------------------------
+   NEXT
+---------------------------------------- */
+
+.contribution-next {
+  position: absolute;
+
+  right: 36px;
+  bottom: 28px;
+
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 10px;
+
+  font-weight: bold;
+
+  letter-spacing: 0.12em;
+
+  animation:
+    contributionNextPulse
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+.contribution-enter-key {
+  padding: 7px 10px;
+
+  background: #111014;
+
+  color: #f4f0e6;
+
+  border-radius: 4px;
+}
+
+/* ----------------------------------------
+   ANIMATIONS
+---------------------------------------- */
+
+@keyframes contributionNumberIn {
+  from {
+    opacity: 0;
+
+    transform:
+      scale(0.45)
+      rotate(-10deg);
+  }
+
+  65% {
+    transform:
+      scale(1.08)
+      rotate(2deg);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      scale(1)
+      rotate(0deg);
+  }
+}
+
+@keyframes roastIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(20px)
+      rotate(-7deg)
+      scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      rotate(-2deg)
+      scale(1);
+  }
+}
+
+@keyframes contributionCircle {
+  from {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  to {
+    transform:
+      translate(-25px, 18px)
+      scale(1.05);
+  }
+}
+
+@keyframes contributionBlock {
+  from {
+    transform:
+      rotate(-18deg)
+      translateY(0);
+  }
+
+  to {
+    transform:
+      rotate(-12deg)
+      translateY(-18px);
+  }
+}
+
+@keyframes contributionOrbitOne {
+  from {
+    transform:
+      rotate(-20deg)
+      translate(0, 0);
+  }
+
+  to {
+    transform:
+      rotate(-15deg)
+      translate(20px, -10px);
+  }
+}
+
+@keyframes contributionOrbitTwo {
+  from {
+    transform:
+      rotate(19deg)
+      translate(0, 0);
+  }
+
+  to {
+    transform:
+      rotate(24deg)
+      translate(-20px, 12px);
+  }
+}
+
+@keyframes contributionNextPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------
+   MOBILE
+---------------------------------------- */
 
 @media (max-width: 700px) {
-  .wrapped-stats-screen {
-    padding: 15px;
+  .contribution-meta.top {
+    top: 18px;
+    left: 18px;
   }
 
-  .wrapped-stats-content {
-    padding: 35px 20px 25px;
+  .contribution-meta.side {
+    display: none;
   }
 
-  .mini-stats {
-    grid-template-columns: 1fr;
+  .contribution-content {
+    width: 92vw;
   }
 
-  .wrapped-stats-content h2 {
-    letter-spacing: 4px;
+  .contribution-number {
+    font-size: clamp(
+      120px,
+      28vw,
+      220px
+    );
+
+    -webkit-text-stroke: 3px #111014;
+
+    text-shadow:
+      7px 7px 0 #b7f000;
   }
 
-  .contribution-label {
-    letter-spacing: 4px;
+  .contribution-number-shadow {
+    font-size: clamp(
+      120px,
+      28vw,
+      220px
+    );
+
+    left: 7px;
+    top: 7px;
+  }
+
+  .contribution-grid {
+    width: 110px;
+    height: 110px;
+
+    right: 4vw;
+    bottom: 13vh;
+
+    background-size: 16px 16px;
+  }
+
+  .contribution-system {
+    left: 18px;
+    bottom: 18px;
+  }
+
+  .contribution-next {
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contribution-number,
+  .contribution-roast,
+  .contribution-circle,
+  .contribution-pink-block,
+  .contribution-orbit,
+  .contribution-next {
+    animation: none;
   }
 }
