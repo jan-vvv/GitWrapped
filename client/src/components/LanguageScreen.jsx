@@ -3,6 +3,7 @@ import "../styles/language.css";
 
 function LanguageScreen({ analytics, username, onNext }) {
   const languages = analytics?.languageBreakdown || [];
+  const stackLanguages = languages.slice(0, 4);
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -25,78 +26,108 @@ function LanguageScreen({ analytics, username, onNext }) {
 
   return (
     <main
-      className="tech-dna-screen"
+      className="tech-stack-screen"
       onClick={onNext}
     >
-      <div className="dna-grid" />
-      <div className="dna-noise" />
+      <div className="stack-noise" />
 
-      <div className="dna-meta dna-meta-top">
-        GITWRAPPED // TECH DNA
+      <div className="stack-meta">
+        GITWRAPPED // TECH STACK
       </div>
 
-      <div className="dna-meta dna-meta-side">
+      <div className="stack-user">
         @{username}
       </div>
 
-      <div className="dna-orbit dna-orbit-one" />
-      <div className="dna-orbit dna-orbit-two" />
+     
+      
 
-      <section className="dna-content">
+      <section className="stack-content">
 
-        <p className="dna-kicker">
-          YOUR STACK HAS A STRUCTURE
-        </p>
+        <div className="stack-heading">
+          <p>YOUR LANGUAGES HAVE BEEN STACKED</p>
 
-        <h1 className="dna-title">
-          TECH DNA
-        </h1>
-
-<div className="dna-stage">
-  <div className="dna-strand dna-left" />
-  <div className="dna-strand dna-right" />
-
-  {languages.slice(0, 6).map((item, index) => (
-    <div
-      className={`dna-step dna-step-${index}`}
-      key={item.language}
-    >
-      <span className="dna-node left-node" />
-      <span className="dna-node right-node" />
-
-      <span className="dna-rung" />
-
-      <span className="dna-language">
-        {item.language}
-      </span>
-
-      <span className="dna-percent">
-        {item.percentage}%
-      </span>
-    </div>
-  ))}
-</div>
-
-        <div className="dna-summary">
-          <span>
-            {analytics.languageCount || languages.length}
-          </span>
-
-          <small>
-            LANGUAGES DETECTED
-          </small>
+          <h1>
+            YOUR TECH
+            <br />
+            <span>STACK</span>
+          </h1>
         </div>
+
+        <div className="burger-hero">
+
+          {/* top bun */}
+          <div className="burger-bun burger-bun-top">
+            <span className="seed seed-1" />
+            <span className="seed seed-2" />
+            <span className="seed seed-3" />
+            <span className="seed seed-4" />
+            <span className="seed seed-5" />
+            <span className="seed seed-6" />
+          </div>
+
+          {/* language layers */}
+          <div className="burger-stack">
+            {stackLanguages.map((item, index) => (
+              <div
+                key={item.language}
+                className={`burger-layer burger-layer-${index}`}
+                style={{
+                  "--layer-height": `${Math.max(
+                    54,
+                    38 + item.percentage * 1.05
+                  )}px`,
+                  "--delay": `${600 + index * 220}ms`,
+                }}
+              >
+                <strong>
+                  {item.language}
+                </strong>
+
+                <span>
+                  {item.percentage}%
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* decorative sauce */}
+          <div className="stack-sauce stack-sauce-pink" />
+          <div className="stack-sauce stack-sauce-dark" />
+
+          {/* bottom bun */}
+          <div className="burger-bun burger-bun-bottom" />
+
+        </div>
+
+        <div className="stack-result">
+          <strong>
+            {analytics.languageCount || stackLanguages.length}
+          </strong>
+
+          <span>
+            LANGUAGES DETECTED
+          </span>
+        </div>
+
+        <p className="stack-roast">
+          You don't have a tech stack.
+          <br />
+          You have a buffet.
+        </p>
 
       </section>
 
-      <div className="dna-system">
-        <span>GENETIC PROFILE // ACTIVE</span>
-        <span>SCAN COMPLETE</span>
-      </div>
+      <div className="stack-footer">
+        <span>STACK ANALYSIS // COMPLETE</span>
 
-      <div className="dna-next">
-        <span className="dna-enter-key">ENTER</span>
-        <span>TO CONTINUE</span>
+        <div className="stack-next">
+          <span className="stack-enter-key">
+            ENTER
+          </span>
+
+          <span>TO CONTINUE</span>
+        </div>
       </div>
     </main>
   );

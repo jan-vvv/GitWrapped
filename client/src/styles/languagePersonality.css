@@ -1,163 +1,1250 @@
+/* =========================================================
+   GITWRAPPED — LANGUAGE PERSONALITY
+
+   OG DESIGN PRESERVED
+   Responsive sizing added
+========================================================= */
+
 .language-personality-screen {
-  min-height: 100vh;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  position: fixed;
 
-.language-personality-screen .terminal-window {
-  width: min(900px, 92vw);
-  min-height: 760px;
-}
+  inset: 0;
 
-.language-personality-content {
-  min-height: 680px;
-  padding: 42px 50px 35px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-}
-
-.language-personality-content .system-text {
   width: 100%;
-  text-align: left;
-  margin: 0 0 12px;
-}
+  height: 100dvh;
 
-.card-number {
-  margin: 5px 0 55px;
-  font-size: 11px;
-  letter-spacing: 4px;
-  opacity: 0.5;
-}
+  overflow: hidden;
 
-.personality-eyebrow {
-  margin: 0 0 18px;
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(255, 79, 163, 0.38),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 84% 78%,
+      rgba(183, 240, 0, 0.24),
+      transparent 27%
+    ),
+    linear-gradient(
+      135deg,
+      #3f087f 0%,
+      #6b18c7 48%,
+      #4c0b91 100%
+    );
 
-  font-size: 12px;
-  letter-spacing: 5px;
-  opacity: 0.65;
-}
-
-.personality-language {
-  margin: 0;
-
-  font-size: clamp(70px, 12vw, 130px);
-  line-height: 0.9;
-  letter-spacing: 6px;
-
-  text-shadow:
-    0 0 8px currentColor,
-    0 0 25px currentColor,
-    0 0 55px currentColor;
-}
-
-.personality-divider {
-  margin: 30px 0;
-  font-size: 16px;
-  opacity: 0.7;
-}
-
-.personality-title {
-  margin: 0;
-
-  font-size: clamp(28px, 5vw, 52px);
-  letter-spacing: 4px;
-
-  text-shadow:
-    0 0 8px currentColor,
-    0 0 22px currentColor;
-}
-
-.personality-vibe {
-  margin: 14px 0 22px;
-
-  font-size: 11px;
-  letter-spacing: 5px;
-  opacity: 0.65;
-}
-
-.personality-description {
-  max-width: 620px;
-
-  margin: 0;
-
-  font-size: 16px;
-  line-height: 1.7;
-  letter-spacing: 1px;
-
-  opacity: 0.85;
-}
-
-.personality-tags {
-  margin-top: 30px;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  gap: 10px;
-}
-
-.personality-tags span {
-  padding: 8px 14px;
-
-  border: 1px solid currentColor;
-
-  font-size: 10px;
-  letter-spacing: 2px;
-}
-
-.personality-footer {
-  margin-top: auto;
-  margin-bottom: 22px;
-
-  font-size: 11px;
-  letter-spacing: 4px;
-  opacity: 0.55;
-}
-
-.wrapped-next-button {
-  padding: 14px 30px;
-
-  background: transparent;
-  border: 1px solid currentColor;
-
-  font-family: inherit;
-  font-size: 14px;
-  letter-spacing: 2px;
+  color: #111014;
 
   cursor: pointer;
 
-  transition: 0.2s ease;
+  isolation: isolate;
 }
 
-.wrapped-next-button:hover {
-  transform: translateY(-2px);
+
+/* =========================================================
+   CRT TEXTURE
+========================================================= */
+
+.language-personality-noise {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.07;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.05) 0px,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  z-index: 30;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.language-meta,
+.language-user {
+  position: absolute;
+
+  z-index: 40;
+
+  color: #f4f0e6;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: clamp(8px, 0.65vw, 10px);
+
+  font-weight: bold;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.language-meta {
+  top: clamp(18px, 2vw, 28px);
+
+  left: clamp(18px, 2.5vw, 34px);
+}
+
+.language-user {
+  top: clamp(18px, 2vw, 28px);
+
+  right: clamp(18px, 2.5vw, 32px);
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   BACKGROUND SHAPES
+========================================================= */
+
+.language-shape {
+  position: absolute;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  border:
+    clamp(2px, 0.3vw, 4px)
+    solid #111014;
+}
+
+.language-shape-one {
+  width: clamp(
+    150px,
+    16.85vw,
+    230px
+  );
+
+  aspect-ratio: 1;
+
+  left: clamp(
+    -90px,
+    -5.5vw,
+    -75px
+  );
+
+  top: 15%;
+
+  background: #b7f000;
+
+  border-radius: 50%;
+
+  animation:
+    languageShapeOne
+    7s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.language-shape-two {
+  width: clamp(
+    190px,
+    19vw,
+    260px
+  );
+
+  height: clamp(
+    75px,
+    7.7vw,
+    105px
+  );
+
+  right: clamp(
+    -90px,
+    -5.5vw,
+    -75px
+  );
+
+  bottom: 17%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #54f5ff,
+      #ff4fa3,
+      #b7f000
+    );
+
+  border-radius: 999px;
+
+  transform: rotate(-20deg);
+
+  animation:
+    languageShapeTwo
+    8s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   MAIN SCENE
+
+   IMPORTANT:
+
+   This stays as a NORMAL FLOW layout,
+   just like the original.
+
+   The scene width shrinks with the viewport,
+   and the children use container units so
+   their proportions stay consistent.
+========================================================= */
+
+.language-scene {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  /*
+     Keep the OG 980px composition.
+
+     The height limit is intentionally much looser than before,
+     so the scene doesn't become tiny on laptop screens.
+  */
+  width: min(
+    980px,
+    88vw,
+    135vh
+  );
+
+  transform:
+    translate(-50%, -50%);
+
+  text-align: center;
+
+  z-index: 10;
+
+  container-type: inline-size;
+
+  animation:
+    languageSceneIn
+    800ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.language-kicker {
+  margin: 0 0 0.5cqw;
+
+  color: #b7f000;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 1.02cqw;
+
+  font-weight: bold;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LANGUAGE NAME
+========================================================= */
+
+.language-name {
+  position: relative;
+
+  z-index: 8;
+
+  margin: 0;
+
+  font-family:
+    Arial Black,
+    Impact,
+    "Helvetica Neue",
+    sans-serif;
+
+  /*
+     OG was ~125px at the largest size.
+     12.75cqw = 125px when scene = 980px.
+  */
+
+  font-size:
+    clamp(
+      48px,
+      12.75cqw,
+      125px
+    );
+
+  line-height: 0.78;
+
+  font-weight: 950;
+
+  letter-spacing: -0.085em;
+
+  text-transform: uppercase;
+
+  color: #f4f0e6;
+
+  -webkit-text-stroke:
+    clamp(1.5px, 0.3cqw, 3px)
+    #111014;
+
+  text-shadow:
+    clamp(4px, 0.82cqw, 8px)
+    clamp(4px, 0.82cqw, 8px)
+    0
+    #ff4fa3;
+
+  animation:
+    languageNameIn
+    750ms
+    120ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+
+/* =========================================================
+   MAIN LANGUAGE ART
+
+   THIS REMAINS BELOW JAVASCRIPT
+   AND ABOVE PERSONALITY.
+========================================================= */
+
+.language-art {
+  position: relative;
+
+  width: 73.47cqw;
+
+  height: 30.61cqw;
+
+  margin:
+    2.55cqw
+    auto
+    1.02cqw;
+
+  z-index: 7;
+}
+
+
+/* =========================================================
+   JAVASCRIPT TILE
+========================================================= */
+
+.js-tile {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 18.88cqw;
+  height: 18.88cqw;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-5deg);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #f7df1e;
+
+  border:
+    0.61cqw
+    solid #111014;
 
   box-shadow:
-    0 0 10px currentColor,
-    0 0 25px currentColor;
+    1.22cqw
+    1.22cqw
+    0
+    #111014;
+
+  z-index: 5;
+
+  animation:
+    jsTileIn
+    750ms
+    450ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
 }
 
+.js-tile span {
+  font-family:
+    Arial Black,
+    Impact,
+    sans-serif;
+
+  font-size: 8.16cqw;
+
+  font-weight: 950;
+
+  letter-spacing: -0.09em;
+
+  color: #111014;
+}
+
+
+/* =========================================================
+   JS CODE GRAPHICS
+========================================================= */
+
+.js-code {
+  position: absolute;
+
+  z-index: 6;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-weight: 900;
+
+  color: #111014;
+
+  text-shadow:
+    0.3cqw
+    0.3cqw
+    0
+    #f7df1e;
+}
+
+.js-curly-left {
+  left: 12%;
+
+  top: 5%;
+
+  font-size: 9.39cqw;
+
+  transform: rotate(-10deg);
+}
+
+.js-curly-right {
+  right: 10%;
+
+  top: 7%;
+
+  font-size: 9.39cqw;
+
+  transform: rotate(9deg);
+}
+
+.js-arrow {
+  left: 16%;
+
+  bottom: 11%;
+
+  color: #54f5ff;
+
+  font-size: 4.29cqw;
+
+  transform: rotate(-7deg);
+
+  text-shadow:
+    0.3cqw
+    0.3cqw
+    0
+    #111014;
+}
+
+.js-parentheses {
+  right: 17%;
+
+  bottom: 14%;
+
+  color: #ff4fa3;
+
+  font-size: 4.9cqw;
+
+  transform: rotate(8deg);
+
+  text-shadow:
+    0.3cqw
+    0.3cqw
+    0
+    #111014;
+}
+
+.js-semicolon {
+  right: 32%;
+
+  top: 4%;
+
+  color: #b7f000;
+
+  font-size: 5.51cqw;
+
+  transform: rotate(12deg);
+
+  text-shadow:
+    0.3cqw
+    0.3cqw
+    0
+    #111014;
+}
+
+
+/* =========================================================
+   CONSOLE.LOG()
+========================================================= */
+
+.js-console {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -4px;
+
+  transform:
+    translateX(-50%)
+    rotate(-2deg);
+
+  padding:
+    0.82cqw
+    1.43cqw;
+
+  background: #111014;
+
+  color: #f4f0e6;
+
+  border:
+    0.3cqw
+    solid #f7df1e;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 1.22cqw;
+
+  font-weight: bold;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+
+  z-index: 8;
+}
+
+
+/* =========================================================
+   PIXEL DETAILS
+========================================================= */
+
+.js-pixel-block {
+  position: absolute;
+
+  width: 1.84cqw;
+  height: 1.84cqw;
+
+  background: #f4f0e6;
+
+  border:
+    0.3cqw
+    solid #111014;
+
+  z-index: 4;
+}
+
+.block-one {
+  left: 31%;
+
+  top: 17%;
+
+  animation:
+    pixelFloat
+    3s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.block-two {
+  right: 28%;
+
+  top: 20%;
+
+  background: #54f5ff;
+
+  animation:
+    pixelFloat
+    4s
+    300ms
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.block-three {
+  right: 31%;
+
+  bottom: 13%;
+
+  background: #b7f000;
+
+  animation:
+    pixelFloat
+    3.5s
+    500ms
+    ease-in-out
+    infinite
+    alternate;
+}
+
+
+/* =========================================================
+   FALLBACK GRAPHIC
+========================================================= */
+
+.generic-language-art {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 18.88cqw;
+  height: 18.88cqw;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-5deg);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #b7f000;
+
+  border:
+    0.61cqw
+    solid #111014;
+
+  box-shadow:
+    1.22cqw
+    1.22cqw
+    0
+    #111014;
+}
+
+.generic-language-art span {
+  font-family:
+    Arial Black,
+    Impact,
+    sans-serif;
+
+  font-size: 6.63cqw;
+
+  font-weight: 950;
+}
+
+
+/* =========================================================
+   PERSONALITY
+
+   THIS IS RELATIVE / NORMAL FLOW.
+
+   It stays UNDER the JS graphic automatically.
+========================================================= */
+
+.language-result {
+  position: relative;
+
+  z-index: 10;
+
+  animation:
+    personalityIn
+    700ms
+    900ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+
+/* =========================================================
+   PERSONALITY LABEL
+========================================================= */
+
+.language-result-label {
+  margin: 0 0 0.71cqw;
+
+  color: #b7f000;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.92cqw;
+
+  font-weight: bold;
+
+  letter-spacing: 0.19em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PERSONALITY TITLE
+========================================================= */
+
+.language-result h2 {
+  margin: 0;
+
+  font-family:
+    Arial Black,
+    Impact,
+    "Helvetica Neue",
+    sans-serif;
+
+  font-size:
+    clamp(
+      35px,
+      7.55cqw,
+      74px
+    );
+
+  line-height: 0.82;
+
+  font-weight: 950;
+
+  letter-spacing: -0.07em;
+
+  text-transform: uppercase;
+
+  color: #f4f0e6;
+
+  -webkit-text-stroke:
+    clamp(1px, 0.2cqw, 2px)
+    #111014;
+
+  text-shadow:
+    0.61cqw
+    0.61cqw
+    0
+    #b7f000;
+}
+
+
+/* =========================================================
+   VIBE
+========================================================= */
+
+.language-vibe {
+  display: inline-block;
+
+  margin-top: 1.12cqw;
+
+  padding:
+    0.61cqw
+    1.12cqw;
+
+  background: #f7df1e;
+
+  border:
+    0.3cqw
+    solid #111014;
+
+  color: #111014;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.92cqw;
+
+  font-weight: bold;
+
+  letter-spacing: 0.15em;
+
+  transform: rotate(-1deg);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.language-description {
+  max-width: 61.22cqw;
+
+  margin:
+    1.12cqw
+    auto
+    0;
+
+  color: #f4f0e6;
+
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(
+      12px,
+      1.73cqw,
+      17px
+    );
+
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.language-footer {
+  position: absolute;
+
+  left: clamp(18px, 2.5vw, 34px);
+
+  bottom: clamp(18px, 2vw, 28px);
+
+  z-index: 40;
+
+  display: flex;
+
+  gap: clamp(
+    12px,
+    1.35vw,
+    18px
+  );
+
+  color: #f4f0e6;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:
+    clamp(
+      7px,
+      0.66vw,
+      9px
+    );
+
+  font-weight: bold;
+
+  letter-spacing: 0.12em;
+}
+
+.language-footer span:last-child {
+  opacity: 0.5;
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+.language-next {
+  position: absolute;
+
+  right: clamp(18px, 2.5vw, 34px);
+
+  bottom: clamp(18px, 2vw, 28px);
+
+  z-index: 40;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: clamp(
+    6px,
+    0.6vw,
+    8px
+  );
+
+  color: #f4f0e6;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size:
+    clamp(
+      8px,
+      0.73vw,
+      10px
+    );
+
+  font-weight: bold;
+
+  letter-spacing: 0.12em;
+
+  animation:
+    nextPulse
+    1.8s
+    ease-in-out
+    infinite;
+}
+
+.language-enter {
+  padding:
+    clamp(5px, 0.5vw, 7px)
+    clamp(7px, 0.7vw, 10px);
+
+  background: #f4f0e6;
+
+  color: #111014;
+
+  border-radius: 4px;
+
+  box-shadow:
+    3px
+    3px
+    0
+    #111014;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes languageSceneIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -47%)
+      scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes languageNameIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(22px)
+      rotate(-2deg)
+      scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      rotate(0)
+      scale(1);
+  }
+}
+
+@keyframes jsTileIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -45%)
+      rotate(8deg)
+      scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(-5deg)
+      scale(1);
+  }
+}
+
+@keyframes personalityIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+@keyframes pixelFloat {
+  from {
+    transform:
+      translateY(0)
+      rotate(0);
+  }
+
+  to {
+    transform:
+      translateY(-10px)
+      rotate(12deg);
+  }
+}
+
+@keyframes languageShapeOne {
+  from {
+    transform:
+      translate(0, 0);
+  }
+
+  to {
+    transform:
+      translate(20px, -15px);
+  }
+}
+
+@keyframes languageShapeTwo {
+  from {
+    transform:
+      rotate(-20deg)
+      translate(0, 0);
+  }
+
+  to {
+    transform:
+      rotate(-14deg)
+      translate(-15px, 10px);
+  }
+}
+
+@keyframes nextPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+
+   KEEP THE SAME COMPOSITION.
+   Only make the canvas narrower.
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .language-scene {
+    width: min(980px, 92vw);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+
+   Same original vertical hierarchy:
+
+   LANGUAGE
+        ↓
+   JS GRAPHIC
+        ↓
+   PERSONALITY
+        ↓
+   DESCRIPTION
+========================================================= */
+
 @media (max-width: 700px) {
+
   .language-personality-screen {
-    padding: 15px;
+    overflow: hidden;
   }
 
-  .language-personality-content {
-    padding: 35px 20px 25px;
+  .language-meta {
+    left: 18px;
+
+    top: 18px;
+
+    font-size: 8px;
   }
 
-  .personality-language {
-    letter-spacing: 3px;
+  .language-user {
+    right: 18px;
+
+    top: 18px;
+
+    font-size: 8px;
   }
 
-  .personality-title {
-    letter-spacing: 2px;
+  .language-scene {
+    width: 92vw;
+
+    max-height: 90dvh;
+  }
+
+  .language-kicker {
+    font-size: 1.9cqw;
+  }
+
+  .language-name {
+    font-size:
+      clamp(
+        48px,
+        15cqw,
+        82px
+      );
+
+    -webkit-text-stroke:
+      2px
+      #111014;
+
+    text-shadow:
+      5px
+      5px
+      0
+      #ff4fa3;
+
+    /*
+       On portrait screens the word can wrap,
+       but its position in the story stays the same.
+    */
+    white-space: normal;
+  }
+
+  .language-art {
+    width: 92cqw;
+
+    height: 30cqw;
+
+    margin-top: 3cqw;
+  }
+
+  .js-tile,
+  .generic-language-art {
+    width: 36cqw;
+
+    height: 36cqw;
+
+    border-width: 4px;
+
+    box-shadow:
+      8px
+      8px
+      0
+      #111014;
+  }
+
+  .js-tile span {
+    font-size: 11cqw;
+  }
+
+  .js-curly-left,
+  .js-curly-right {
+    font-size: 14cqw;
+  }
+
+  .js-arrow {
+    font-size: 7cqw;
+  }
+
+  .js-parentheses {
+    font-size: 8cqw;
+  }
+
+  .js-semicolon {
+    font-size: 9cqw;
+  }
+
+  .js-console {
+    font-size: 2.3cqw;
+
+    padding:
+      1.4cqw
+      2.4cqw;
+  }
+
+  .language-result h2 {
+    font-size:
+      clamp(
+        31px,
+        9cqw,
+        52px
+      );
+  }
+
+  .language-result-label {
+    font-size: 1.9cqw;
+  }
+
+  .language-vibe {
+    font-size: 1.8cqw;
+  }
+
+  .language-description {
+    width: 88cqw;
+
+    font-size: 2.8cqw;
+  }
+
+  .language-footer {
+    display: none;
+  }
+
+  .language-next {
+    right: 18px;
+
+    bottom: 18px;
+
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .language-scene,
+  .language-name,
+  .js-tile,
+  .language-result,
+  .language-shape,
+  .language-next {
+    animation: none;
+
+    opacity: 1;
   }
 }

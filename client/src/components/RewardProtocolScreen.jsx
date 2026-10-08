@@ -1,82 +1,111 @@
 import { useEffect, useState } from "react";
-
 import "../styles/rewardProtocol.css";
 
-function RewardProtocolScreen({
-  analytics,
-  onComplete,
-}) {
-  const [step, setStep] = useState(0);
-
-  const achievements =
-    analytics.achievements || [];
-
+function RewardProtocolScreen({ analytics, onComplete }) {
   const messages = [
     "> SENTENCE ACCEPTED_",
     "> RECORDING DEVELOPER OFFENSES... OK",
     "> CATALOGUING ACTIVITY... OK",
     "> SEARCHING FOR ACHIEVEMENTS...",
-    "> ACHIEVEMENT PROTOCOL UNLOCKED.",
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [showUnlock, setShowUnlock] = useState(false);
+
   useEffect(() => {
-    const timer = setInterval(() => {
-      setStep((currentStep) => {
-        if (currentStep < messages.length - 1) {
-          return currentStep + 1;
-        }
+    // Show the final unlock separately so it feels like
+    // a reveal instead of just another log message.
+    if (showUnlock) {
+      const timer = setTimeout(() => {
+        onComplete();
+      }, 1300);
 
-        clearInterval(timer);
+      return () => clearTimeout(timer);
+    }
 
-        setTimeout(() => {
-          onComplete();
-        }, 1000);
-
-        return currentStep;
-      });
+    const timer = setTimeout(() => {
+      if (currentIndex < messages.length - 1) {
+        setCurrentIndex((prev) => prev + 1);
+      } else {
+        setShowUnlock(true);
+      }
     }, 700);
 
-    return () => clearInterval(timer);
-  }, [onComplete, messages.length]);
+    return () => clearTimeout(timer);
+  }, [
+    currentIndex,
+    showUnlock,
+    onComplete,
+    messages.length,
+  ]);
 
   return (
-    <main className="reward-protocol-screen crt-screen">
-      <div className="reward-protocol-content">
+    <main className="reward-protocol-screen">
+      <div className="reward-scanlines" />
 
-        <p className="reward-label">
-          GITWRAPPED_OS // REWARD PROTOCOL
-        </p>
+      {!showUnlock ? (
+        <section className="reward-terminal">
 
-        <div className="reward-log">
-
-          {messages
-            .slice(0, step + 1)
-            .map((message) => (
-              <p key={message}>
-                {message}
-              </p>
-            ))}
-
-        </div>
-
-        {step === messages.length - 1 && (
-          <div className="achievement-detected">
-
+          <div className="reward-top">
             <span>
-              ACHIEVEMENTS DETECTED
+              GITWRAPPED // REWARD PROTOCOL
             </span>
 
-            <strong>
-              {achievements.length}
-            </strong>
-
             <span>
-              READY TO UNLOCK
+              CARD 07
             </span>
+          </div>
+
+          <div className="reward-log">
+
+            {messages
+              .slice(0, currentIndex + 1)
+              .map((message, index) => (
+                <p
+                  key={message}
+                  className={
+                    index === currentIndex
+                      ? "reward-line active"
+                      : "reward-line"
+                  }
+                >
+                  {message}
+                </p>
+              ))}
 
           </div>
-        )}
 
+          <div className="reward-cursor">
+            _
+          </div>
+
+        </section>
+      ) : (
+        <section className="reward-unlock">
+
+          <div className="reward-unlock-small">
+            GITWRAPPED // SYSTEM NOTICE
+          </div>
+
+          <div className="reward-unlock-main">
+            ACHIEVEMENT
+            <br />
+            PROTOCOL
+          </div>
+
+          <div className="reward-unlock-final">
+            UNLOCKED.
+          </div>
+
+        </section>
+      )}
+
+      <div className="reward-footer">
+        <span>
+          {showUnlock
+            ? "ACCESSING ACHIEVEMENT ARCHIVE..."
+            : "PLEASE WAIT..."}
+        </span>
       </div>
     </main>
   );

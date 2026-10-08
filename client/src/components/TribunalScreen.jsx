@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "../styles/tribunal.css";
 
 function TribunalScreen({
@@ -6,124 +7,201 @@ function TribunalScreen({
   onNext,
 }) {
   const personality =
-    analytics.developerPersonality;
+    analytics?.developerPersonality;
 
   const charges =
     personality?.charges || [];
 
-  return (
-    <main className="tribunal-screen crt-screen">
-      <div className="terminal-window">
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (
+        event.key === "Enter" ||
+        event.key === " " ||
+        event.key === "ArrowRight"
+      ) {
+        event.preventDefault();
+        onNext();
+      }
+    }
 
-        <div className="terminal-header">
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [onNext]);
+
+  return (
+    <main
+      className="tribunal-screen"
+      onClick={onNext}
+    >
+      <div className="tribunal-noise" />
+
+      {/* HEADER */}
+
+      <div className="tribunal-meta">
+        GITWRAPPED // TRIBUNAL PROTOCOL
+      </div>
+
+      <div className="tribunal-user">
+        @{username}
+      </div>
+
+
+      {/* DECORATIVE GRAPHICS */}
+
+      <div className="tribunal-squiggle tribunal-squiggle-one" />
+      <div className="tribunal-squiggle tribunal-squiggle-two" />
+
+
+      {/* MAIN STORY */}
+
+      <section className="tribunal-content">
+
+        <div className="tribunal-topline">
           <span>
-            GITWRAPPED // TRIBUNAL PROTOCOL
+            CARD 06
           </span>
 
-          <div className="window-controls">
-            <span>_</span>
-            <span>□</span>
-            <span>×</span>
-          </div>
+          <span>
+            DEVELOPER REVIEW
+          </span>
+
+          <span>
+            EVIDENCE FOUND
+          </span>
         </div>
 
-        <div className="tribunal-content">
 
-          <p className="system-text">
-            &gt; ACTIVITY PROFILE REVIEWED_
+        {/* CASE */}
+
+        <div className="tribunal-case">
+
+          <p className="tribunal-kicker">
+            THE PEOPLE VS.
           </p>
 
-          <p className="card-number">
-            CARD 06 // TRIBUNAL PROTOCOL
-          </p>
-
-          <p className="tribunal-label">
-            THE GITWRAPPED TRIBUNAL
-          </p>
-
-          <h2 className="tribunal-case">
-            THE PEOPLE
-            <br />
-            VS.
-            <br />
+          <h1>
             @{username}
+          </h1>
+
+        </div>
+
+
+        {/* CHARGES */}
+
+        <div className="tribunal-charges-heading">
+          CHARGED WITH
+        </div>
+
+        <div className="charges-list">
+
+          {charges.slice(0, 3).map(
+            (charge, index) => (
+              <div
+                className="charge-row"
+                key={
+                  charge.title ||
+                  `charge-${index}`
+                }
+              >
+                <span className="charge-index">
+                  0{index + 1}
+                </span>
+
+                <span className="charge-title">
+                  {charge.title}
+                </span>
+
+                <span className="charge-description">
+                  {charge.description}
+                </span>
+              </div>
+            )
+          )}
+
+        </div>
+
+
+        {/* VERDICT */}
+
+        <div className="tribunal-verdict">
+
+          <span className="verdict-kicker">
+            VERDICT
+          </span>
+
+          <h2>
+            {personality?.verdict ||
+              "GUILTY"}
           </h2>
 
-          <p className="tribunal-status">
-            &gt; SUFFICIENT EVIDENCE FOUND_
-          </p>
+        </div>
 
-          <div className="charges-list">
 
-            {charges.map((charge, index) => (
-              <div
-                className="charge-card"
-                key={charge.title}
-              >
-                <div className="charge-number">
-                  CHARGE #{String(index + 1).padStart(2, "0")}
-                </div>
+        {/* IDENTITY */}
 
-                <h3>
-                  {charge.title}
-                </h3>
+        <div className="tribunal-identity">
 
-                <p>
-                  {charge.description}
-                </p>
-              </div>
-            ))}
+          <span>
+            GUILTY OF BEING
+          </span>
 
-          </div>
-
-          <div className="verdict-box">
-
-            <span className="verdict-label">
-              VERDICT
-            </span>
-
-            <strong>
-              {personality?.verdict ||
-                "GUILTY"}
-            </strong>
-
-            <span className="guilty-of">
-              GUILTY OF BEING
-            </span>
-
-            <h3>
-              {personality?.title ||
-                "THE CODE EXPLORER"}
-            </h3>
-
-          </div>
-
-          <div className="sentence-box">
-
-            <span>
-              SENTENCE
-            </span>
-
-            <p>
-              {personality?.sentence ||
-                "Keep coding. The system is watching."}
-            </p>
-
-          </div>
-
-          <p className="tribunal-footer">
-            &gt; CASE CLOSED_
-          </p>
-
-          <button
-            className="wrapped-next-button"
-            onClick={onNext}
-          >
-            [ ACCEPT SENTENCE → ]
-          </button>
+          <strong>
+            {personality?.title ||
+              "THE CODE EXPLORER"}
+          </strong>
 
         </div>
+
+
+        {/* SENTENCE */}
+
+        <div className="sentence-box">
+
+          <span>
+            SENTENCE //
+          </span>
+
+          <p>
+            {personality?.sentence ||
+              "Keep coding. The system is watching."}
+          </p>
+
+        </div>
+
+      </section>
+
+
+      {/* FOOTER */}
+
+      <div className="tribunal-footer">
+        <span>
+          CASE CLOSED_
+        </span>
       </div>
+
+
+      {/* NEXT */}
+
+      <button
+        className="tribunal-next"
+        onClick={(event) => {
+          event.stopPropagation();
+          onNext();
+        }}
+      >
+        ACCEPT SENTENCE
+        <strong>ENTER →</strong>
+      </button>
+
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "../styles/languagePersonality.css";
 
 function LanguagePersonalityScreen({
@@ -5,111 +6,145 @@ function LanguagePersonalityScreen({
   username,
   onNext,
 }) {
-  const personality = analytics.languagePersonality;
+  const personality = analytics?.languagePersonality;
+  const topLanguage = analytics?.topLanguage || "UNKNOWN";
 
-  const topLanguage =
-    analytics.topLanguage || "UNKNOWN";
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (
+        event.key === "Enter" ||
+        event.key === " " ||
+        event.key === "ArrowRight"
+      ) {
+        event.preventDefault();
+        onNext();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onNext]);
+
+  const isJavaScript =
+    topLanguage.toLowerCase() === "javascript";
 
   return (
-    <main className="language-personality-screen crt-screen">
-      <div className="terminal-window">
+    <main
+      className={`language-personality-screen ${
+        isJavaScript ? "language-javascript" : ""
+      }`}
+      onClick={onNext}
+    >
+      <div className="language-personality-noise" />
 
-        <div className="terminal-header">
-          <span>GITWRAPPED // CARD 04</span>
+      <div className="language-meta">
+        GITWRAPPED // LANGUAGE PROFILE
+      </div>
 
-          <div className="window-controls">
-            <span>_</span>
-            <span>□</span>
-            <span>×</span>
-          </div>
-        </div>
+      <div className="language-user">
+        @{username}
+      </div>
 
-        <div className="language-personality-content">
+      {/* decorative background shapes */}
+      <div className="language-shape language-shape-one" />
+      <div className="language-shape language-shape-two" />
 
-          <p className="system-text">
-            &gt; PROFILE: @{username}
-          </p>
+      <section className="language-scene">
 
-          <p className="card-number">
-            CARD 04 // LANGUAGE PROFILE
-          </p>
+        <p className="language-kicker">
+          YOUR MAIN LANGUAGE
+        </p>
 
-          <p className="personality-eyebrow">
-            YOUR MAIN CHARACTER
-          </p>
+        <h1 className="language-name">
+          {topLanguage}
+        </h1>
 
-          <h2 className="personality-language">
-            {topLanguage}
-          </h2>
+        {/* language-specific graphic */}
+        <div className="language-art">
 
-          <div className="personality-divider">
-            ◆
-          </div>
-
-          <h3 className="personality-title">
-            {personality?.title || "THE CODE MYSTIC"}
-          </h3>
-
-          <p className="personality-vibe">
-            {personality?.vibe || "MYSTERIOUS"}
-          </p>
-
-          <p className="personality-description">
-            {personality?.description ||
-              "Your code remains classified."}
-          </p>
-
-          {/* Roast */}
-          {personality?.roast && (
-            <div className="personality-roast">
-
-              <span className="roast-label">
-                &gt; OFFICIAL ROAST
-              </span>
-
-              <p>
-                "{personality.roast}"
-              </p>
-
-            </div>
-          )}
-
-          {/* Side effects */}
-          {personality?.sideEffects && (
-            <div className="side-effects">
-
-              <span className="side-effects-label">
-                SIDE EFFECTS
-              </span>
-
-              <div className="side-effects-list">
-
-                {personality.sideEffects.map(
-                  (effect) => (
-                    <span key={effect}>
-                      {effect}
-                    </span>
-                  )
-                )}
-
+          {isJavaScript ? (
+            <>
+              <div className="js-code js-curly-left">
+                {"{"}
               </div>
 
+              <div className="js-code js-curly-right">
+                {"}"}
+              </div>
+
+              <div className="js-code js-arrow">
+                =&gt;
+              </div>
+
+              <div className="js-code js-parentheses">
+                ()
+              </div>
+
+              <div className="js-code js-semicolon">
+                ;
+              </div>
+
+              <div className="js-console">
+                console.log()
+              </div>
+
+              <div className="js-tile">
+                <span>JS</span>
+              </div>
+
+              <div className="js-pixel-block block-one" />
+              <div className="js-pixel-block block-two" />
+              <div className="js-pixel-block block-three" />
+            </>
+          ) : (
+            <div className="generic-language-art">
+              <span>
+                {topLanguage.slice(0, 3).toUpperCase()}
+              </span>
             </div>
           )}
 
-          <p className="personality-footer">
-            &gt; LANGUAGE PROFILE LOCKED_
+        </div>
+
+        <div className="language-result">
+
+          <p className="language-result-label">
+            YOUR LANGUAGE PERSONALITY
           </p>
 
-          <button
-            className="wrapped-next-button"
-            onClick={onNext}
-          >
-            [ CONTINUE → ]
-          </button>
+          <h2>
+            {personality?.title || "THE CODE MYSTIC"}
+          </h2>
+
+          {personality?.vibe && (
+            <div className="language-vibe">
+              {personality.vibe}
+            </div>
+          )}
+
+          <p className="language-description">
+            {personality?.description ||
+              "Your coding identity remains classified."}
+          </p>
 
         </div>
 
+      </section>
+
+      <div className="language-footer">
+        <span>GITWRAPPED_OS</span>
+        <span>PROFILE // LOCKED</span>
+      </div>
+
+      <div className="language-next">
+        <span className="language-enter">
+          ENTER
+        </span>
+
+        <span>TO CONTINUE</span>
       </div>
     </main>
   );

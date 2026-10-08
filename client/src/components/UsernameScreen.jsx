@@ -14,6 +14,7 @@ import TribunalScreen from "./TribunalScreen";
 import AchievementsScreen from "./AchievementsScreen";
 import FinalDiagnosisScreen from "./FinalDiagnosisScreen";
 import FinalWrappedScreen from "./FinalWrappedScreen";
+import RoastScreen from "./RoastScreen";
 
 function UsernameScreen() {
   const [username, setUsername] = useState("");
@@ -108,10 +109,19 @@ function UsernameScreen() {
       <LanguagePersonalityScreen
         analytics={analytics}
         username={githubUser.login}
-        onNext={() => setCurrentScreen("activity")}
+        onNext={() => setCurrentScreen("roast")}
       />
     );
   }
+  if (currentScreen === "roast") {
+  return (
+    <RoastScreen
+      analytics={analytics}
+      username={githubUser.login}
+      onNext={() => setCurrentScreen("activity")}
+    />
+  );
+}
 
   if (currentScreen === "activity") {
     return (

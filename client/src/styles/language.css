@@ -1,9 +1,9 @@
 /* =========================================================
-   GITWRAPPED — TECH DNA
-   ORIGINAL DNA DESIGN + BOLDER TYPOGRAPHY
+   GITWRAPPED — YOUR TECH STACK
+   OLD TECH DNA ENVIRONMENT + BURGER HERO
    ========================================================= */
 
-.tech-dna-screen {
+.tech-stack-screen {
   position: fixed;
   inset: 0;
 
@@ -12,20 +12,116 @@
 
   overflow: hidden;
 
-  background: #17102f;
-
   color: #f4f0e6;
 
   cursor: pointer;
 
   isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 18% 20%,
+      rgba(109, 92, 255, 0.55) 0%,
+      rgba(109, 92, 255, 0.18) 20%,
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 83% 18%,
+      rgba(255, 79, 163, 0.42) 0%,
+      rgba(255, 79, 163, 0.12) 22%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 70% 78%,
+      rgba(84, 245, 255, 0.28) 0%,
+      rgba(84, 245, 255, 0.08) 22%,
+      transparent 43%
+    ),
+    radial-gradient(
+      circle at 28% 82%,
+      rgba(183, 240, 0, 0.18) 0%,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #120a27 0%,
+      #17102f 38%,
+      #24104c 72%,
+      #120a27 100%
+    );
+}
+.tech-stack-screen::before {
+  content: "";
+
+  position: absolute;
+
+  width: 65vw;
+  height: 24vw;
+
+  left: -16vw;
+  top: 18vh;
+
+  border: 3px solid rgba(255, 79, 163, 0.55);
+
+  border-radius: 50%;
+
+  transform:
+    rotate(-16deg);
+
+  box-shadow:
+    0 0 35px rgba(255, 79, 163, 0.12),
+    inset 0 0 35px rgba(255, 79, 163, 0.08);
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  animation:
+    backgroundOrbitOne
+    9s
+    ease-in-out
+    infinite
+    alternate;
 }
 
+.tech-stack-screen::after {
+  content: "";
+
+  position: absolute;
+
+  width: 48vw;
+  height: 18vw;
+
+  right: -12vw;
+  bottom: 10vh;
+
+  border: 3px solid rgba(183, 240, 0, 0.42);
+
+  border-radius: 50%;
+
+  transform:
+    rotate(18deg);
+
+  box-shadow:
+    0 0 30px rgba(183, 240, 0, 0.1);
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  animation:
+    backgroundOrbitTwo
+    8s
+    ease-in-out
+    infinite
+    alternate;
+}
 /* =========================================================
    BACKGROUND GRID
+   Inspired directly by the original Tech DNA scene
    ========================================================= */
 
-.dna-grid {
+.stack-grid {
   position: absolute;
   inset: 0;
 
@@ -49,16 +145,18 @@
 
   transform-origin: center bottom;
 
-  opacity: 0.55;
+  opacity: 0.48;
 
-  z-index: 0;
+  z-index: 2;
+
+  pointer-events: none;
 }
 
 /* =========================================================
    CRT / NOISE
    ========================================================= */
 
-.dna-noise {
+.stack-noise {
   position: absolute;
   inset: 0;
 
@@ -82,7 +180,8 @@
    METADATA
    ========================================================= */
 
-.dna-meta {
+.stack-meta,
+.stack-user {
   position: absolute;
 
   z-index: 30;
@@ -98,106 +197,65 @@
   letter-spacing: 0.16em;
 
   text-transform: uppercase;
+
+  color: #f4f0e6;
 }
 
-.dna-meta-top {
+.stack-meta {
   top: 28px;
   left: 34px;
 }
 
-.dna-meta-side {
-  top: 50%;
+.stack-user {
+  top: 28px;
   right: 28px;
 
-  writing-mode: vertical-rl;
-
-  transform: translateY(-50%);
-
   opacity: 0.55;
-}
-
-/* =========================================================
-   DECORATIVE ORBITS
-   ========================================================= */
-
-.dna-orbit {
-  position: absolute;
-
-  border: 2px solid #ff4fa3;
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  z-index: 1;
-}
-
-.dna-orbit-one {
-  width: 45vw;
-  height: 15vw;
-
-  min-width: 420px;
-  min-height: 140px;
-
-  left: -12vw;
-  top: 12vh;
-
-  transform: rotate(-14deg);
-
-  animation:
-    dnaOrbitOne
-    9s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.dna-orbit-two {
-  width: 36vw;
-  height: 14vw;
-
-  min-width: 340px;
-  min-height: 125px;
-
-  right: -10vw;
-  bottom: 12vh;
-
-  border-color: #b7f000;
-
-  transform: rotate(18deg);
-
-  animation:
-    dnaOrbitTwo
-    8s
-    ease-in-out
-    infinite
-    alternate;
 }
 
 /* =========================================================
    MAIN CONTENT
    ========================================================= */
 
-.dna-content {
+.stack-content {
   position: absolute;
 
   left: 50%;
   top: 50%;
 
   width: min(850px, 90vw);
+  height: 88vh;
 
   transform: translate(-50%, -50%);
 
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
 
   z-index: 10;
 }
 
 /* =========================================================
-   KICKER
+   HEADING
    ========================================================= */
 
-.dna-kicker {
+.stack-heading {
+  position: relative;
+
+  z-index: 15;
+
+  text-align: center;
+
+  animation:
+    stackHeadingIn
+    700ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+.stack-heading p {
   margin: 0 0 5px;
 
   color: #b7f000;
@@ -211,13 +269,11 @@
   font-weight: bold;
 
   letter-spacing: 0.25em;
+
+  text-transform: uppercase;
 }
 
-/* =========================================================
-   TECH DNA TITLE
-   ========================================================= */
-
-.dna-title {
+.stack-heading h1 {
   margin: 0;
 
   font-family:
@@ -227,233 +283,283 @@
     sans-serif;
 
   font-size:
-    clamp(45px, 7vw, 90px);
+    clamp(34px, 4.5vw, 60px);
 
-  line-height: 0.9;
+  line-height: 0.82;
 
   font-weight: 950;
 
-  letter-spacing: -0.07em;
+  letter-spacing: -0.075em;
+
+  text-transform: uppercase;
 
   color: #f4f0e6;
 
   -webkit-text-stroke: 2px #111014;
 
   text-shadow:
-    6px 6px 0 #6d5cff;
+    5px 5px 0 #6d5cff;
+}
+
+.stack-heading h1 span {
+  color: #b7f000;
+
+  text-shadow:
+    5px 5px 0 #111014;
 }
 
 /* =========================================================
-   ORIGINAL DNA STAGE
+   BURGER HERO
    ========================================================= */
 
-.dna-stage {
+.burger-hero {
   position: relative;
 
-  width: min(620px, 70vw);
+  width: 390px;
+  height: 455px;
 
-  height: min(430px, 45vh);
+  margin-top: 8px;
 
-  margin: 15px auto 0;
+  display: flex;
+  flex-direction: column;
 
-  perspective: 900px;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 12;
 
   animation:
-    dnaStageIn
-    900ms
+    burgerHeroIn
+    800ms
+    180ms
     cubic-bezier(.16, 1, .3, 1)
     both;
 }
 
 /* =========================================================
-   ORIGINAL DNA STRANDS
+   BUNS
    ========================================================= */
 
-.dna-strand {
-  position: absolute;
+.burger-bun {
+  position: relative;
 
-  top: 0;
-  bottom: 0;
+  z-index: 8;
 
-  width: 9px;
+  width: 315px;
 
-  border-radius: 999px;
+  border: 4px solid #111014;
+}
+
+/* top bun */
+
+.burger-bun-top {
+  height: 78px;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 35%,
+      #ffd978 0%,
+      #f5a334 55%,
+      #db7621 100%
+    );
+
+  border-radius:
+    48% 48% 15% 15% /
+    70% 70% 28% 28%;
+
+  box-shadow:
+    9px 9px 0 #111014;
+
+  animation:
+    bunTopIn
+    600ms
+    450ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+/* bottom bun */
+
+.burger-bun-bottom {
+  height: 48px;
+
+  margin-top: -1px;
 
   background:
     linear-gradient(
       180deg,
-      #6d5cff,
-      #54f5ff,
-      #b7f000,
-      #ff4fa3,
-      #6d5cff
+      #f5a334,
+      #d66c20
     );
 
+  border-radius:
+    12% 12% 38% 38% /
+    20% 20% 68% 68%;
+
   box-shadow:
-    0 0 18px rgba(84, 245, 255, 0.55);
-
-  opacity: 0.95;
-}
-
-.dna-left {
-  left: 50%;
-
-  transform:
-    translateX(-65px)
-    rotate(-9deg);
+    9px 9px 0 #111014;
 
   animation:
-    strandLeft
-    4s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.dna-right {
-  left: 50%;
-
-  transform:
-    translateX(65px)
-    rotate(9deg);
-
-  animation:
-    strandRight
-    4s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-/* =========================================================
-   DNA ROWS
-   ========================================================= */
-
-.dna-step {
-  position: absolute;
-
-  left: 50%;
-
-  width: 250px;
-
-  height: 48px;
-
-  transform:
-    translateX(-50%)
-    translateY(20px);
-
-  opacity: 0;
-
-  animation:
-    dnaStepIn
-    650ms
+    bunBottomIn
+    600ms
+    1450ms
     cubic-bezier(.16, 1, .3, 1)
-    forwards;
-}
-
-.dna-step-0 {
-  top: 4%;
-  animation-delay: 500ms;
-}
-
-.dna-step-1 {
-  top: 19%;
-  animation-delay: 800ms;
-}
-
-.dna-step-2 {
-  top: 34%;
-  animation-delay: 1100ms;
-}
-
-.dna-step-3 {
-  top: 49%;
-  animation-delay: 1400ms;
-}
-
-.dna-step-4 {
-  top: 64%;
-  animation-delay: 1700ms;
-}
-
-.dna-step-5 {
-  top: 79%;
-  animation-delay: 2000ms;
+    both;
 }
 
 /* =========================================================
-   DNA NODES
+   SEEDS
    ========================================================= */
 
-.dna-node {
+.seed {
   position: absolute;
 
-  top: 50%;
-
-  width: 16px;
-  height: 16px;
-
-  transform: translateY(-50%);
+  width: 8px;
+  height: 13px;
 
   border-radius: 50%;
 
-  background: #f4f0e6;
+  background: #fff1bd;
 
-  border: 3px solid #111014;
-
-  box-shadow:
-    0 0 12px rgba(255, 255, 255, 0.4);
+  border: 2px solid #111014;
 }
 
-.left-node {
-  left: 36px;
+.seed-1 {
+  left: 55px;
+  top: 21px;
+  transform: rotate(25deg);
 }
 
-.right-node {
-  right: 36px;
+.seed-2 {
+  left: 100px;
+  top: 33px;
+  transform: rotate(-22deg);
+}
+
+.seed-3 {
+  left: 145px;
+  top: 19px;
+  transform: rotate(18deg);
+}
+
+.seed-4 {
+  left: 191px;
+  top: 34px;
+  transform: rotate(-27deg);
+}
+
+.seed-5 {
+  left: 235px;
+  top: 21px;
+  transform: rotate(24deg);
+}
+
+.seed-6 {
+  left: 267px;
+  top: 37px;
+  transform: rotate(-17deg);
 }
 
 /* =========================================================
-   DNA HORIZONTAL RUNG
+   BURGER STACK
    ========================================================= */
 
-.dna-rung {
-  position: absolute;
+.burger-stack {
+  width: 320px;
 
-  left: 49px;
-  right: 49px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  top: 50%;
+  margin-top: -4px;
 
-  height: 5px;
+  z-index: 7;
+}
 
-  transform:
-    translateY(-50%)
-    rotate(-2deg);
+.burger-layer {
+  position: relative;
 
-  border-radius: 999px;
+  width: 320px;
 
-  background: #54f5ff;
+  min-height: var(--layer-height);
 
-  box-shadow:
-    0 0 10px rgba(84, 245, 255, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 0 42px;
+
+  border-left: 4px solid #111014;
+  border-right: 4px solid #111014;
+  border-bottom: 3px solid #111014;
+
+  animation:
+    layerIn
+    550ms
+    var(--delay)
+    cubic-bezier(.16, 1, .3, 1)
+    both;
 }
 
 /* =========================================================
-   LANGUAGE NAMES
+   INDIVIDUAL LAYERS
    ========================================================= */
 
-.dna-language {
-  position: absolute;
+.burger-layer-0 {
+  background:
+    linear-gradient(
+      180deg,
+      #ff5d91,
+      #ff3f70
+    );
 
-  left: 275px;
+  border-radius:
+    6px 6px 16px 16px;
+}
 
-  top: 50%;
+.burger-layer-1 {
+  background:
+    linear-gradient(
+      180deg,
+      #b7f34d,
+      #6fe15a
+    );
 
-  transform:
-    translateY(-50%)
-    rotate(-2deg);
+  border-radius:
+    5px 5px 15px 15px;
+}
 
+.burger-layer-2 {
+  background:
+    linear-gradient(
+      180deg,
+      #ffc34d,
+      #ff832e
+    );
+
+  border-radius:
+    14px 14px 5px 5px;
+}
+
+.burger-layer-3 {
+  background:
+    linear-gradient(
+      180deg,
+      #53edf4,
+      #6c7cff
+    );
+
+  border-radius:
+    5px 5px 14px 14px;
+}
+
+/* =========================================================
+   LANGUAGE TEXT
+   ========================================================= */
+
+.burger-layer strong {
   font-family:
     Arial Black,
     Impact,
@@ -461,7 +567,7 @@
     sans-serif;
 
   font-size:
-    clamp(20px, 2.1vw, 30px);
+    clamp(17px, 1.9vw, 24px);
 
   font-weight: 950;
 
@@ -469,43 +575,19 @@
 
   letter-spacing: -0.05em;
 
-  color: #f4f0e6;
+  color: #111014;
 
-  -webkit-text-stroke: 1.5px #111014;
+  text-align: center;
 
-  text-shadow:
-    4px 4px 0 #ff4fa3;
+  text-transform: uppercase;
 
   white-space: nowrap;
-
-  z-index: 5;
 }
 
-/* Alternate shadow colors */
-
-.dna-step-1 .dna-language {
-  text-shadow:
-    4px 4px 0 #6d5cff;
-}
-
-.dna-step-2 .dna-language {
-  text-shadow:
-    4px 4px 0 #b7f000;
-}
-
-.dna-step-3 .dna-language {
-  text-shadow:
-    4px 4px 0 #54f5ff;
-}
-
-/* =========================================================
-   LANGUAGE PERCENTAGE
-   ========================================================= */
-
-.dna-percent {
+.burger-layer span {
   position: absolute;
 
-  right: 275px;
+  right: 13px;
 
   top: 50%;
 
@@ -519,58 +601,59 @@
 
   font-weight: 900;
 
-  color: #b7f000;
+  color: #111014;
 
-  letter-spacing: 0.05em;
-
-  text-shadow:
-    0 0 5px rgba(183, 240, 0, 0.35);
+  letter-spacing: 0.04em;
 }
 
 /* =========================================================
-   SUMMARY
+   RESULT
    ========================================================= */
 
-.dna-summary {
-  margin-top: 2px;
+.stack-result {
+  position: relative;
+
+  z-index: 15;
 
   display: flex;
 
-  justify-content: center;
-
   align-items: baseline;
 
-  gap: 10px;
+  justify-content: center;
 
-  opacity: 0;
+  gap: 9px;
+
+  margin-top: 7px;
 
   animation:
-    summaryIn
-    700ms
-    2300ms
+    resultIn
+    650ms
+    1750ms
     ease
-    forwards;
+    both;
 }
 
-.dna-summary span {
+.stack-result strong {
   font-family:
     Arial Black,
     Impact,
     sans-serif;
 
-  font-size: 26px;
-
-  line-height: 1;
+  font-size: 28px;
 
   font-weight: 950;
 
+  line-height: 1;
+
   color: #b7f000;
+
+  -webkit-text-stroke: 2px #111014;
 
   text-shadow:
     3px 3px 0 #111014;
 }
 
-.dna-summary small {
+.stack-result span {
   font-family:
     "Courier New",
     monospace;
@@ -579,51 +662,54 @@
 
   font-weight: bold;
 
-  letter-spacing: 0.17em;
-}
+  letter-spacing: 0.16em;
 
-/* =========================================================
-   FOOTER SYSTEM INFO
-   ========================================================= */
-
-.dna-system {
-  position: absolute;
-
-  left: 34px;
-  bottom: 28px;
-
-  z-index: 30;
-
-  display: flex;
-
-  gap: 18px;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  font-size: 9px;
-
-  font-weight: bold;
-
-  letter-spacing: 0.12em;
-}
-
-.dna-system span:first-child {
   color: #f4f0e6;
 }
 
-.dna-system span:last-child {
-  opacity: 0.5;
+/* =========================================================
+   ROAST
+   ========================================================= */
+
+.stack-roast {
+  position: relative;
+
+  z-index: 15;
+
+  margin: 9px 0 0;
+
+  text-align: center;
+
+  color: #f4f0e6;
+
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(12px, 1.15vw, 16px);
+
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  animation:
+    roastIn
+    650ms
+    1950ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
 }
 
 /* =========================================================
-   NEXT PROMPT
+   FOOTER
    ========================================================= */
 
-.dna-next {
+.stack-footer {
   position: absolute;
 
+  left: 34px;
   right: 36px;
   bottom: 28px;
 
@@ -631,28 +717,37 @@
 
   display: flex;
 
+  justify-content: space-between;
   align-items: center;
-
-  gap: 8px;
 
   font-family:
     "Courier New",
     monospace;
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: bold;
 
   letter-spacing: 0.12em;
 
+  color: #f4f0e6;
+}
+
+.stack-next {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
   animation:
-    dnaNextPulse
+    stackNextPulse
     1.8s
     ease-in-out
     infinite;
 }
 
-.dna-enter-key {
+.stack-enter-key {
   padding: 7px 10px;
 
   background: #f4f0e6;
@@ -670,83 +765,115 @@
 /* =========================================================
    ANIMATIONS
    ========================================================= */
-
-@keyframes dnaStageIn {
+@keyframes backgroundOrbitOne {
   from {
-    opacity: 0;
-
     transform:
-      scale(0.88)
-      rotate(-2deg);
+      rotate(-16deg)
+      translate(0, 0)
+      scale(1);
   }
 
   to {
-    opacity: 1;
-
     transform:
-      scale(1)
-      rotate(0deg);
+      rotate(-11deg)
+      translate(25px, -10px)
+      scale(1.04);
   }
 }
 
-@keyframes dnaStepIn {
+@keyframes backgroundOrbitTwo {
+  from {
+    transform:
+      rotate(18deg)
+      translate(0, 0)
+      scale(1);
+  }
+
+  to {
+    transform:
+      rotate(23deg)
+      translate(-20px, 12px)
+      scale(1.05);
+  }
+}
+@keyframes stackHeadingIn {
   from {
     opacity: 0;
 
     transform:
-      translateX(-50%)
-      translateY(20px)
-      scale(0.8);
+      translateY(18px)
+      scale(0.95);
   }
 
   to {
     opacity: 1;
 
     transform:
-      translateX(-50%)
       translateY(0)
       scale(1);
   }
 }
 
-@keyframes strandLeft {
-  from {
-    transform:
-      translateX(-65px)
-      rotate(-9deg)
-      scaleY(1);
-  }
-
-  to {
-    transform:
-      translateX(-85px)
-      rotate(-15deg)
-      scaleY(1.04);
-  }
-}
-
-@keyframes strandRight {
-  from {
-    transform:
-      translateX(65px)
-      rotate(9deg)
-      scaleY(1);
-  }
-
-  to {
-    transform:
-      translateX(85px)
-      rotate(15deg)
-      scaleY(1.04);
-  }
-}
-
-@keyframes summaryIn {
+@keyframes burgerHeroIn {
   from {
     opacity: 0;
 
     transform:
-      translateY(12px);
+      translateY(25px)
+      scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes bunTopIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-25px)
+      rotate(-3deg);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      rotate(0);
+  }
+}
+
+@keyframes layerIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-18px)
+      scaleX(0.9);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scaleX(1);
+  }
+}
+
+@keyframes bunBottomIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(24px);
   }
 
   to {
@@ -757,70 +884,91 @@
   }
 }
 
-@keyframes dnaOrbitOne {
+@keyframes resultIn {
   from {
+    opacity: 0;
+
     transform:
-      rotate(-14deg)
-      translate(0, 0);
+      translateY(10px);
   }
 
   to {
+    opacity: 1;
+
     transform:
-      rotate(-9deg)
-      translate(16px, 8px);
+      translateY(0);
   }
 }
 
-@keyframes dnaOrbitTwo {
+@keyframes roastIn {
   from {
+    opacity: 0;
+
     transform:
-      rotate(18deg)
-      translate(0, 0);
+      translateY(10px);
   }
 
   to {
+    opacity: 1;
+
     transform:
-      rotate(24deg)
-      translate(-16px, -8px);
+      translateY(0);
   }
 }
 
-@keyframes dnaNextPulse {
+@keyframes stackNextPulse {
   0%,
   100% {
     opacity: 0.55;
-    transform: translateX(0);
   }
 
   50% {
     opacity: 1;
-    transform: translateX(-4px);
   }
 }
 
 /* =========================================================
-   TABLET / SMALL LAPTOP
+   TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
-  .dna-content {
-    width: 92vw;
+  .stack-content {
+    width: 94vw;
   }
 
-  .dna-stage {
-    width: 76vw;
-    height: 48vh;
-  }
+  .burger-hero {
+  position: relative;
 
-  .dna-language {
-    left: 255px;
+  width: 390px;
+  height: 455px;
 
-    font-size:
-      clamp(18px, 2.7vw, 27px);
-  }
+  margin-top: 8px;
 
-  .dna-percent {
-    right: 255px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  z-index: 12;
+
+  filter:
+    drop-shadow(
+      0 18px 22px rgba(0, 0, 0, 0.28)
+    );
+
+  animation:
+    burgerHeroIn
+    800ms
+    180ms
+    cubic-bezier(.16, 1, .3, 1)
+    both;
+}
+
+  .burger-bun,
+  .burger-stack,
+  .burger-layer {
+    width: 300px;
   }
 }
 
@@ -829,134 +977,76 @@
    ========================================================= */
 
 @media (max-width: 700px) {
-  .dna-meta-top {
+  .stack-meta {
     top: 18px;
     left: 18px;
-  }
 
-  .dna-meta-side {
-    display: none;
-  }
-
-  .dna-content {
-    width: 95vw;
-  }
-
-  .dna-kicker {
     font-size: 8px;
-
-    letter-spacing: 0.18em;
   }
 
-  .dna-title {
+  .stack-user {
+    top: 18px;
+    right: 18px;
+
+    font-size: 8px;
+  }
+
+  .stack-heading h1 {
     font-size:
-      clamp(38px, 11vw, 62px);
-
-    text-shadow:
-      4px 4px 0 #6d5cff;
+      clamp(32px, 10vw, 52px);
   }
 
-  .dna-stage {
-    width: 94vw;
-    height: 410px;
-
-    margin-top: 5px;
+  .burger-hero {
+    width: 330px;
+    height: 400px;
   }
 
-  .dna-strand {
-    width: 7px;
+  .burger-bun,
+  .burger-stack,
+  .burger-layer {
+    width: 255px;
   }
 
-  .dna-left {
-    transform:
-      translateX(-48px)
-      rotate(-9deg);
+  .burger-bun-top {
+    height: 68px;
   }
 
-  .dna-right {
-    transform:
-      translateX(48px)
-      rotate(9deg);
+  .burger-bun-bottom {
+    height: 42px;
   }
 
-  .dna-node {
-    width: 13px;
-    height: 13px;
-
-    border-width: 2px;
-  }
-
-  .left-node {
-    left: 30px;
-  }
-
-  .right-node {
-    right: 30px;
-  }
-
-  .dna-rung {
-    left: 40px;
-    right: 40px;
-
-    height: 4px;
-  }
-
-  .dna-language {
-    left: 180px;
-
+  .burger-layer strong {
     font-size:
-      clamp(16px, 5vw, 24px);
-
-    -webkit-text-stroke: 1px #111014;
-
-    text-shadow:
-      3px 3px 0 #ff4fa3;
+      clamp(15px, 4.5vw, 21px);
   }
 
-  .dna-step-1 .dna-language {
-    text-shadow:
-      3px 3px 0 #6d5cff;
-  }
-
-  .dna-step-2 .dna-language {
-    text-shadow:
-      3px 3px 0 #b7f000;
-  }
-
-  .dna-step-3 .dna-language {
-    text-shadow:
-      3px 3px 0 #54f5ff;
-  }
-
-  .dna-percent {
-    right: 180px;
+  .burger-layer span {
+    right: 9px;
 
     font-size: 8px;
   }
 
-  .dna-summary {
-    margin-top: -5px;
+  .stack-result strong {
+    font-size: 23px;
   }
 
-  .dna-summary span {
-    font-size: 22px;
-  }
-
-  .dna-summary small {
+  .stack-result span {
     font-size: 8px;
   }
 
-  .dna-system {
+  .stack-roast {
+    font-size: 11px;
+  }
+
+  .stack-footer {
     left: 18px;
-    bottom: 18px;
-
-    font-size: 8px;
-  }
-
-  .dna-next {
     right: 18px;
     bottom: 18px;
 
+    font-size: 8px;
+  }
+
+  .stack-next {
     font-size: 8px;
   }
 }
@@ -966,12 +1056,13 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  .dna-stage,
-  .dna-step,
-  .dna-strand,
-  .dna-summary,
-  .dna-orbit,
-  .dna-next {
+  .stack-heading,
+  .burger-hero,
+  .burger-bun,
+  .burger-layer,
+  .stack-result,
+  .stack-roast,
+  .stack-next {
     animation: none;
 
     opacity: 1;
