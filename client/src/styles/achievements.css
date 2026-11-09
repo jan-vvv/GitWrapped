@@ -1,24 +1,23 @@
-
-
+/* =====================================================
+   ACHIEVEMENTS SCREEN CONTAINER
+===================================================== */
 .achievement-screen {
   position: fixed;
   inset: 0;
-
   width: 100vw;
   height: 100dvh;
-
   overflow: hidden;
-
   background: #111;
-
   cursor: pointer;
-
   isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
-
+/* =====================================================
+   POSTER CARD (Full-Screen Fluid Wrapper)
+===================================================== */
 .achievement-poster {
   --pink: #ed67b6;
   --lime: #c7ff00;
@@ -27,165 +26,80 @@
   --cream: #f5efdf;
   --black: #080808;
 
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width: min(
-    100vw,
-    177.7778vh
-  );
-
-  height: min(
-    100vh,
-    56.25vw
-  );
-
-  container-type: inline-size;
-
-  overflow: hidden;
+  position: relative;
+  width: 96vw;
+  height: 92vh;
+  max-width: 1600px;
+  max-height: 900px;
+  
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-template-rows: auto 1fr auto;
+  gap: 16px 24px;
+  padding: 3vw 3.5vw;
+  box-sizing: border-box;
 
   background: var(--pink);
-
   color: var(--black);
-
-  border-radius:
-    1.3%
-    1.1%
-    1.5%
-    1.1%;
-
-  transform:
-    translate(-50%, -50%)
-    perspective(1800px)
-    rotateX(.65deg)
-    rotateY(-.7deg)
-    rotateZ(-.1deg);
-
-  transform-style: preserve-3d;
+  border-radius: 16px;
+  overflow: hidden;
 
   box-shadow:
     inset 15px 0 28px rgba(0,0,0,.035),
     inset -15px 0 30px rgba(255,255,255,.04),
     0 12px 38px rgba(0,0,0,.24);
 
-  animation:
-    poster-in
-    650ms
-    cubic-bezier(.16,1,.3,1)
-    both;
+  animation: poster-in 650ms cubic-bezier(.16,1,.3,1) both;
 }
 
-
-
-
+/* Poster Overlays & Grain */
 .achievement-poster::before {
   content: "";
-
   position: absolute;
   inset: 0;
-
   z-index: 90;
-
   border-radius: inherit;
-
   pointer-events: none;
-
-  box-shadow:
-    inset 11px 0 22px rgba(0,0,0,.035),
-    inset -11px 0 22px rgba(255,255,255,.03);
+  box-shadow: inset 11px 0 22px rgba(0,0,0,.035), inset -11px 0 22px rgba(255,255,255,.03);
 }
 
 .achievement-poster::after {
   content: "";
-
   position: absolute;
   inset: 0;
-
   z-index: 89;
-
   pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 58%,
-      rgba(0,0,0,.06)
-    );
-
+  background: radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.06));
   mix-blend-mode: multiply;
 }
-
-
-
 
 .poster-grain {
   position: absolute;
   inset: 0;
-
   z-index: 100;
-
   pointer-events: none;
-
   opacity: .14;
-
   background-image:
-    radial-gradient(
-      circle,
-      rgba(0,0,0,.22) 0 .6px,
-      transparent .8px
-    ),
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.12) 0 .5px,
-      transparent .75px
-    ),
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 3px,
-      rgba(0,0,0,.035) 4px
-    );
-
-  background-size:
-    7px 7px,
-    9px 9px,
-    100% 4px;
-
+    radial-gradient(circle, rgba(0,0,0,.22) 0 .6px, transparent .8px),
+    radial-gradient(circle, rgba(255,255,255,.12) 0 .5px, transparent .75px),
+    repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(0,0,0,.035) 4px);
+  background-size: 7px 7px, 9px 9px, 100% 4px;
   mix-blend-mode: multiply;
 }
 
-
-
-
+/* =====================================================
+   HEADER (Row 1: Spans across both columns)
+===================================================== */
 .poster-top {
-  position: absolute;
-
-  left: 4%;
-  right: 4%;
-
-  top: 3.2%;
-
-  z-index: 25;
-
+  grid-column: 1 / -1;
   display: flex;
-
   align-items: center;
-
-  gap: 1.25cqw;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-
-
-  font-size: .8cqw;
-
+  gap: 16px;
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.9vw, 14px);
   font-weight: 900;
-
   letter-spacing: .09em;
+  z-index: 25;
 }
 
 .poster-logo,
@@ -195,1274 +109,344 @@
 
 .poster-top-rule {
   flex: 1;
-
   height: 1.5px;
-
   background: var(--black);
 }
 
-
-
-
-.poster-title {
-  position: absolute;
-
-  left: 13.5%;
-  right: 7%;
-
-  top: 10%;
-
+/* =====================================================
+   MAIN TITLE (Spans across top, scales cleanly)
+===================================================== */
+.poster-title-container {
+  grid-column: 1 / -1;
+  position: relative;
   z-index: 4;
-
-  width: 79%;
-
-  margin: 0;
-
-  font-family:
-    "Arial Black",
-    Impact,
-    sans-serif;
-
-  font-size:
-    clamp(
-      70px,
-      10.2cqw,
-      170px
-    );
-
-  line-height: .82;
-
-  letter-spacing: -.015em;
-
-  font-weight: 950;
-
-  color: var(--black);
-
-  white-space: nowrap;
-
-  transform: none;
-
-  transform-origin: left center;
-
-  pointer-events: none;
-
-  animation:
-    title-in
-    700ms
-    cubic-bezier(.16,1,.3,1)
-    both;
 }
 
-
-
+.poster-title {
+  margin: 0;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(40px, 6.8vw, 110px);
+  line-height: .85;
+  letter-spacing: -.015em;
+  font-weight: 950;
+  color: var(--black);
+  white-space: nowrap;
+  pointer-events: none;
+}
 
 .poster-burst {
   position: absolute;
-
-  right: 5.8%;
-
-  top: 10.8%;
-
-  width: 7.8%;
-
+  right: 0;
+  top: 0;
+  width: clamp(30px, 4.5vw, 65px);
   color: var(--black);
-
   z-index: 8;
 }
 
-
-
-
+/* =====================================================
+   LEFT COLUMN: ILLUSTRATION
+===================================================== */
 .poster-illustration {
-  position: absolute;
-
-  left: 1.5%;
-
-  top: 39%;
-
-  width: 47%;
-
-  height: 50%;
-
+  grid-column: 1;
+  grid-row: 3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
   z-index: 8;
-
-  animation:
-    artwork-in
-    850ms
-    cubic-bezier(.16,1,.3,1)
-    both;
 }
-
-
-
 
 .orbit-svg {
   position: absolute;
-
-  left: 0;
-  top: 4%;
-
   width: 100%;
-  height: 92%;
-
+  height: 100%;
   opacity: .78;
-
   overflow: visible;
 }
 
 .orbit-svg ellipse {
   fill: none;
-
   stroke: var(--black);
-
   stroke-width: 1;
-
   vector-effect: non-scaling-stroke;
 }
 
-
-
 .achievement-art-svg {
-  position: absolute;
-
-  left: 22%;
-
-  top: 4%;
-
-  width: 56%;
-
-  height: 88%;
-
+  width: 75%;
+  max-height: 320px;
   overflow: visible;
-
-  filter:
-    drop-shadow(
-      8px
-      10px
-      0
-      var(--black)
-    );
-
-  transform:
-    rotate(-3deg);
-
-  animation:
-    artwork-object-in
-    900ms
-    100ms
-    cubic-bezier(.16,1,.3,1)
-    both;
+  filter: drop-shadow(8px 10px 0 var(--black));
+  transform: rotate(-3deg);
 }
 
-
-
-.art-dna {
-  left: 25%;
-
-  width: 49%;
-
-  height: 94%;
-}
-
-.art-streak {
-  left: 22%;
-
-  width: 56%;
-
-  height: 94%;
-}
-
-.art-commit {
-  left: 20%;
-
-  width: 60%;
-
-  height: 94%;
-}
-
-.art-quest {
-  left: 18%;
-
-  width: 64%;
-
-  height: 94%;
-}
-
-.art-consistency {
-  left: 17%;
-
-  width: 66%;
-
-  height: 94%;
-}
-
-.art-first-blood {
-  left: 18%;
-
-  width: 64%;
-
-  height: 94%;
-}
-
-.art-repos {
-  left: 17%;
-
-  width: 66%;
-
-  height: 94%;
-}
-
-.art-weekend {
-  left: 18%;
-
-  width: 64%;
-
-  height: 94%;
-}
-
-
-
+.art-dna { width: 65%; }
+.art-streak { width: 70%; }
+.art-commit { width: 75%; }
+.art-quest { width: 80%; }
+.art-consistency { width: 82%; }
+.art-first-blood { width: 80%; }
+.art-repos { width: 82%; }
+.art-weekend { width: 80%; }
 
 .illustration-star {
   position: absolute;
-
   z-index: 20;
-
   color: var(--black);
-
-  font-size: 2cqw;
-
-  line-height: 1;
-
-  animation:
-    sparkle
-    2.4s
-    ease-in-out
-    infinite;
+  font-size: 20px;
+  animation: sparkle 2.4s ease-in-out infinite;
 }
-
-.star-a {
-  left: 8%;
-  top: 28%;
-}
-
-.star-b {
-  right: 4%;
-  top: 48%;
-
-  font-size: 1.4cqw;
-
-  animation-delay: .5s;
-}
-
-.star-c {
-  left: 50%;
-  bottom: 1%;
-
-  font-size: 1.15cqw;
-
-  animation-delay: 1s;
-}
-
-
-
+.star-a { left: 10%; top: 20%; }
+.star-b { right: 10%; top: 50%; animation-delay: .5s; }
+.star-c { left: 40%; bottom: 5%; animation-delay: 1s; }
 
 .poster-checkerboard {
   position: absolute;
-
-  left: -5%;
-
-  bottom: -12%;
-
-  width: 23%;
-
-  height: 36%;
-
-  background:
-    conic-gradient(
-      var(--black) 25%,
-      transparent 0 50%,
-      var(--black) 0 75%,
-      transparent 0
-    );
-
-  background-size:
-    25% 25%;
-
-  border:
-    1.5px solid
-    var(--black);
-
-  transform:
-    rotate(-12deg)
-    skewY(-7deg);
-
+  left: 0;
+  bottom: 0;
+  width: 22%;
+  height: 30%;
+  background: conic-gradient(var(--black) 25%, transparent 0 50%, var(--black) 0 75%, transparent 0);
+  background-size: 20px 20px;
+  border: 1.5px solid var(--black);
+  transform: rotate(-12deg) skewY(-7deg);
   z-index: 3;
 }
 
-
-
+/* =====================================================
+   RIGHT COLUMN: COPY / DETAILS
+===================================================== */
 .poster-copy {
-  position: absolute;
-
-  left: 52%;
-
-  top: 42%;
-
-  width: 41.5%;
-
+  grid-column: 2;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 20;
-
-  animation:
-    copy-in
-    720ms
-    150ms
-    cubic-bezier(.16,1,.3,1)
-    both;
 }
-
-
 
 .copy-kicker {
   display: flex;
-
   align-items: center;
-
-  gap: 1.1cqw;
-
+  gap: 12px;
   width: 100%;
-
-  font-family:
-    "Courier New",
-    monospace;
-
- 
-
-  font-size: .78cqw;
-
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85vw, 13px);
   font-weight: 900;
-
   letter-spacing: .095em;
 }
 
 .copy-kicker > div {
   flex: 1;
-
   height: 1.5px;
-
   background: var(--black);
 }
 
-
-
-
 .copy-title {
   position: relative;
-
   display: inline-block;
-
-  margin-top: 3.8%;
-
+  margin-top: 12px;
   max-width: 100%;
 }
 
 .copy-title h2 {
   position: relative;
-
   z-index: 2;
-
   margin: 0;
-
-  font-family:
-    "Arial Black",
-    Impact,
-    sans-serif;
-
-  font-size: 5.5cqw;
-
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(24px, 3.2vw, 52px);
   line-height: .94;
-
   letter-spacing: -.008em;
-
   font-weight: 950;
-
   color: var(--cream);
-
-  -webkit-text-stroke:
-    .18cqw
-    var(--black);
-
-  paint-order:
-    stroke
-    fill;
-
-  text-shadow:
-    .42cqw
-    .44cqw
-    0
-    var(--black);
-
-  white-space: nowrap;
+  -webkit-text-stroke: 1.5px var(--black);
+  paint-order: stroke fill;
+  text-shadow: 3px 3px 0 var(--black);
+  white-space: normal;
+  word-break: break-word;
 }
 
-
-
-
-.copy-title.achievement-title-long h2 {
-  font-size: 4.35cqw;
-
-  letter-spacing: -.002em;
-}
-
-.copy-title.achievement-title-very-long h2 {
-  font-size: 3.55cqw;
-
-  letter-spacing: .003em;
-}
-
-
-
+.copy-title.achievement-title-long h2 { font-size: clamp(20px, 2.6vw, 42px); }
+.copy-title.achievement-title-very-long h2 { font-size: clamp(18px, 2.2vw, 34px); }
 
 .copy-lime-stroke {
   position: absolute;
-
-  left: -3%;
-
+  left: -2%;
   right: -2%;
-
-  top: 39%;
-
-  height: 42%;
-
+  top: 35%;
+  height: 50%;
   z-index: 1;
-
   background: var(--lime);
-
-  transform:
-    rotate(-3deg)
-    skewX(-7deg);
-
-  clip-path:
-    polygon(
-      1% 17%,
-      96% 0,
-      100% 72%,
-      3% 100%
-    );
+  transform: rotate(-3deg) skewX(-7deg);
+  clip-path: polygon(1% 17%, 96% 0, 100% 72%, 3% 100%);
 }
-
-
-
 
 .copy-status {
   display: flex;
-
   align-items: center;
-
-  gap: .8cqw;
-
-  margin-top: 3.9%;
-
-  font-family:
-    "Courier New",
-    monospace;
-
- 
-
-  font-size: .9cqw;
-
+  gap: 10px;
+  margin-top: 14px;
+  font-family: "Courier New", monospace;
+  font-size: clamp(11px, 0.9vw, 14px);
   font-weight: 900;
-
-  letter-spacing: .075em;
 }
 
 .rarity,
 .unlocked {
-  min-height: 2.6cqw;
-
-  padding:
-    .56cqw
-    1cqw;
-
+  padding: 4px 10px;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
-  border:
-    2px solid
-    var(--black);
-
-  box-shadow:
-    2px
-    2px
-    0
-    rgba(0,0,0,.12);
+  border: 2px solid var(--black);
+  box-shadow: 2px 2px 0 rgba(0,0,0,.12);
 }
 
-.rarity {
-  background: var(--purple);
-}
-
-.unlocked {
-  background: var(--lime);
-}
-
-.dot {
-  font-size: 1.15cqw;
-}
-
-
+.rarity { background: var(--purple); color: var(--cream); }
+.unlocked { background: var(--lime); }
 
 .copy-headline {
-  margin:
-    5%
-    0
-    1.8%;
-
-  font-family:
-    "Arial Black",
-    Arial,
-    sans-serif;
-
- 
-
-  font-size: 2.55cqw;
-
-  line-height: 1;
-
-  letter-spacing: -.006em;
-
+  margin: 16px 0 8px 0;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: clamp(16px, 1.8vw, 26px);
+  line-height: 1.1;
   font-weight: 950;
 }
 
-
-
 .copy-description {
-  width: 94%;
-
+  width: 95%;
   margin: 0;
-
-  font-family:
-    "Courier New",
-    monospace;
-
- 
-  font-size: 1.12cqw;
-
-  line-height: 1.48;
-
+  font-family: "Courier New", monospace;
+  font-size: clamp(11px, 1vw, 15px);
+  line-height: 1.45;
   font-weight: 700;
-
-  letter-spacing: 0;
 }
 
-
-
-
+/* =====================================================
+   FOOTER (Row 4: Bottom Bar & Prompt)
+===================================================== */
 .poster-copy-bottom {
-  position: absolute;
-
-  left: 52%;
-
-  top: 86%;
-
-  width: 41.5%;
-
-  z-index: 25;
-
+  grid-column: 1 / -1;
   display: flex;
-
   align-items: center;
-
-  gap: 1.5cqw;
-
-  animation:
-    bottom-in
-    700ms
-    280ms
-    cubic-bezier(.16,1,.3,1)
-    both;
+  gap: 20px;
+  z-index: 25;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 2px solid var(--black);
 }
-
-
-
 
 .archive-note {
-  flex-shrink: 0;
-
-  font-family:
-    "Courier New",
-    monospace;
-
- 
-
-  font-size: .66cqw;
-
-  line-height: 1.08;
-
+  font-family: "Courier New", monospace;
+  font-size: clamp(9px, 0.75vw, 11px);
+  line-height: 1.1;
   font-weight: 900;
-
   letter-spacing: .08em;
 }
-
-
-
 
 .copy-footer-line {
   flex: 1;
-
   height: 2px;
-
   background: var(--black);
 }
 
-
-
-
 .continue-prompt {
   display: flex;
-
   align-items: center;
-
-  gap: .9cqw;
-
+  gap: 10px;
   white-space: nowrap;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  /*
-    Bigger
-  */
-
-  font-size: .8cqw;
-
+  font-family: "Courier New", monospace;
+  font-size: clamp(11px, 0.85vw, 13px);
   font-weight: 900;
-
-  letter-spacing: .08em;
 }
-
-
-
 
 .enter-box {
-  min-width: 5cqw;
-
-  padding:
-    .6cqw
-    1cqw;
-
+  padding: 4px 10px;
   text-align: center;
-
-  border:
-    2px solid
-    var(--black);
-
+  border: 2px solid var(--black);
   background: var(--pink);
-
-  box-shadow:
-    3px
-    3px
-    0
-    var(--black);
-
-  animation:
-    enter-blink
-    1.15s
-    steps(1, end)
-    infinite;
+  box-shadow: 3px 3px 0 var(--black);
+  animation: enter-blink 1.15s steps(1, end) infinite;
 }
-
-
 
 .poster-bottom {
-  position: absolute;
-
-  left: 4%;
-  right: 4%;
-
-  bottom: 2.5%;
-
-  z-index: 25;
-
+  grid-column: 1 / -1;
   display: flex;
-
   justify-content: space-between;
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  /*
-    Bigger footer
-  */
-
-  font-size: .62cqw;
-
+  font-family: "Courier New", monospace;
+  font-size: clamp(9px, 0.7vw, 11px);
   font-weight: 900;
-
   letter-spacing: .1em;
-
-  opacity: .55;
+  opacity: .6;
 }
 
-
-
-
+/* =====================================================
+   EMPTY STATE
+===================================================== */
 .empty-achievements {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 30;
-
+  grid-column: 1 / -1;
+  grid-row: 2 / 5;
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   text-align: center;
 }
 
 .empty-eyebrow {
-  font-family:
-    "Courier New",
-    monospace;
-
-  font-size: .75cqw;
-
+  font-family: "Courier New", monospace;
+  font-size: 14px;
   font-weight: 900;
-
-  letter-spacing: .1em;
 }
 
 .empty-achievements h1 {
-  margin:
-    2cqw
-    0;
-
-  font-family:
-    "Arial Black",
-    Impact,
-    sans-serif;
-
-  font-size: 7cqw;
-
-  line-height: .85;
-
-  letter-spacing: -.02em;
+  margin: 16px 0;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: 64px;
 }
 
-.empty-achievements span {
-  font-family:
-    "Courier New",
-    monospace;
-
-  font-size: .75cqw;
-
-  font-weight: 900;
-}
-
-
-
-
-.achievement-transitioning
-.poster-illustration {
-  animation:
-    artwork-out
-    .42s
-    ease
-    both;
-}
-
-.achievement-transitioning
-.poster-copy {
-  animation:
-    copy-out
-    .42s
-    ease
-    both;
-}
-
-.achievement-transitioning
-.poster-copy-bottom {
-  animation:
-    bottom-out
-    .42s
-    ease
-    both;
-}
-
-
-
-
-@keyframes poster-in {
-  from {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -49.5%)
-      perspective(1800px)
-      rotateX(1.2deg)
-      rotateY(-1.4deg)
-      rotateZ(-.2deg)
-      scale(.995);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      perspective(1800px)
-      rotateX(.65deg)
-      rotateY(-.7deg)
-      rotateZ(-.1deg)
-      scale(1);
-  }
-}
-
-@keyframes title-in {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-@keyframes artwork-in {
-  from {
-    opacity: 0;
-
-    transform:
-      translateX(-25px)
-      scale(.9);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateX(0)
-      scale(1);
-  }
-}
-
-@keyframes artwork-object-in {
-  from {
-    opacity: 0;
-
-    transform:
-      rotate(-10deg)
-      scale(.82);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      rotate(-3deg)
-      scale(1);
-  }
-}
-
-@keyframes copy-in {
-  from {
-    opacity: 0;
-
-    transform:
-      translateX(24px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateX(0);
-  }
-}
-
-@keyframes bottom-in {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-@keyframes artwork-out {
-  from {
-    opacity: 1;
-
-    transform:
-      translateX(0)
-      scale(1);
-  }
-
-  to {
-    opacity: 0;
-
-    transform:
-      translateX(-30px)
-      scale(.96);
-  }
-}
-
-@keyframes copy-out {
-  from {
-    opacity: 1;
-
-    transform:
-      translateX(0);
-  }
-
-  to {
-    opacity: 0;
-
-    transform:
-      translateX(25px);
-  }
-}
-
-@keyframes bottom-out {
-  from {
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-
-  to {
-    opacity: 0;
-
-    transform:
-      translateY(10px);
-  }
-}
-
-@keyframes sparkle {
-  0%,
-  100% {
-    opacity: .55;
-
-    transform:
-      scale(.9);
-  }
-
-  50% {
-    opacity: 1;
-
-    transform:
-      scale(1.12);
-  }
-}
-
-@keyframes enter-blink {
-  0%,
-  45% {
-    opacity: 1;
-  }
-
-  46%,
-  100% {
-    opacity: .28;
-  }
-}
-
-
-
-
-@media (max-height: 800px) and (min-width: 701px) {
-
-  .poster-title {
-    top: 10%;
-
-    font-size:
-      11.7cqw;
-  }
-
-  .poster-illustration {
-    top: 41%;
-
-    height: 53%;
-  }
-
-  .poster-copy {
-    top: 43%;
-  }
-
-  .poster-copy-bottom {
-    top: 86%;
-  }
-
-  .copy-headline {
-    font-size: 2.3cqw;
-  }
-
-  .copy-description {
-    font-size: 1cqw;
-  }
-
-  .poster-top {
-    font-size: .72cqw;
-  }
-
-  .poster-bottom {
-    font-size: .57cqw;
-  }
-}
-
-
-
-
-@media (max-width: 700px) {
-
+/* =====================================================
+   RESPONSIVE BREAKPOINT FOR SMALL SCREENS / PHONES
+===================================================== */
+@media (max-width: 900px) {
   .achievement-poster {
-    width: auto;
-
-    height:
-      min(
-        100vh,
-        177.7778vw
-      );
-
-    aspect-ratio:
-      9 / 16;
-
-    transform:
-      translate(-50%, -50%);
+    width: 98vw;
+    height: 96vh;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto 1fr auto auto;
+    overflow-y: auto;
+    padding: 20px 16px;
   }
-
-
-  .poster-top {
-    left: 6%;
-    right: 6%;
-
-    top: 3%;
-
-    font-size: 1.9cqw;
-  }
-
-  .poster-mode {
-    display: none;
-  }
-
-
-  .poster-title {
-    left: 7%;
-
-    top: 9.5%;
-
-    width: 86%;
-
-    white-space: normal;
-
-    font-size:
-      12.5cqw;
-
-    line-height: .76;
-  }
-
-
-  .poster-burst {
-    right: 5%;
-
-    top: 10%;
-
-    width: 12%;
-  }
-
 
   .poster-illustration {
-    left: 2%;
-
-    top: 27%;
-
-    width: 96%;
-
-    height: 34%;
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 200px;
   }
-
-
-  .achievement-art-svg {
-    left: 22%;
-
-    top: 4%;
-
-    width: 56%;
-
-    height: 92%;
-  }
-
-
-  .poster-checkerboard {
-    width: 25%;
-    height: 35%;
-
-    left: -5%;
-    bottom: -12%;
-  }
-
 
   .poster-copy {
-    left: 7%;
-
-    top: 63%;
-
-    width: 86%;
+    grid-column: 1;
+    grid-row: 4;
   }
-
-
-  .copy-kicker {
-    font-size: 1.9cqw;
-  }
-
-
-  .copy-title {
-    margin-top: 5%;
-  }
-
-
-  .copy-title h2 {
-    font-size: 11.5cqw;
-
-    letter-spacing: 0;
-
-    -webkit-text-stroke:
-      .35cqw
-      var(--black);
-
-    text-shadow:
-      .9cqw
-      .9cqw
-      0
-      var(--black);
-  }
-
-  .copy-title.achievement-title-long h2 {
-    font-size: 8.5cqw;
-  }
-
-  .copy-title.achievement-title-very-long h2 {
-    font-size: 7.4cqw;
-  }
-
-
-  .copy-status {
-    margin-top: 5%;
-
-    font-size: 2cqw;
-  }
-
-  .rarity,
-  .unlocked {
-    min-height: 5.1cqw;
-
-    padding:
-      1.1cqw
-      1.6cqw;
-  }
-
-
-  .copy-headline {
-    margin-top: 6%;
-
-    font-size: 4.8cqw;
-
-    line-height: 1;
-  }
-
-
-  .copy-description {
-    width: 94%;
-
-    font-size: 2.1cqw;
-
-    line-height: 1.45;
-  }
-
-
-  .poster-copy-bottom {
-    left: 7%;
-
-    top: 88%;
-
-    width: 86%;
-
-    gap: 2cqw;
-  }
-
 
   .archive-note {
     display: none;
   }
-
-
-  .copy-footer-line {
-    height: 1px;
-  }
-
-
-  .continue-prompt {
-    margin-left: auto;
-
-    font-size: 1.9cqw;
-  }
-
-
-  .enter-box {
-    min-width: 11cqw;
-
-    padding:
-      1.2cqw
-      2cqw;
-
-    box-shadow:
-      2px
-      2px
-      0
-      var(--black);
-  }
-
-
-  .poster-bottom {
-    left: 7%;
-    right: 7%;
-
-    bottom: 3%;
-
-    font-size: 1.6cqw;
-  }
 }
 
+/* =====================================================
+   ANIMATIONS
+===================================================== */
+@keyframes poster-in {
+  from { opacity: 0; transform: scale(.98); }
+  to { opacity: 1; transform: scale(1); }
+}
 
+@keyframes sparkle {
+  0%, 100% { opacity: .55; transform: scale(.9); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
 
-
-@media (prefers-reduced-motion: reduce) {
-
-  .achievement-poster * {
-    animation: none !important;
-  }
+@keyframes enter-blink {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: .28; }
 }

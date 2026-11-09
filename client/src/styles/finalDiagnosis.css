@@ -1,210 +1,395 @@
+/* =====================================================
+   FULLSCREEN WRAPPER (Fixed Viewport)
+===================================================== */
 .final-diagnosis-screen {
-  min-height: 100vh;
-  padding: 30px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.final-diagnosis-screen .terminal-window {
-  width: min(900px, 94vw);
-  min-height: 760px;
-}
-
-.final-diagnosis-content {
-  min-height: 680px;
-  padding: 40px 45px 30px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-}
-
-.final-diagnosis-content .system-text {
-  width: 100%;
-  text-align: left;
-  margin: 0 0 10px;
-}
-
-.card-number {
-  margin: 5px 0 35px;
-
-  font-size: 10px;
-  letter-spacing: 4px;
-
-  opacity: 0.5;
-}
-
-.diagnosis-eyebrow {
-  margin: 0 0 18px;
-
-  font-size: 11px;
-  letter-spacing: 4px;
-
-  opacity: 0.6;
-}
-
-.diagnosis-title {
-  margin: 0;
-
-  max-width: 800px;
-
-  font-size: clamp(38px, 7vw, 78px);
-  line-height: 0.95;
-
-  letter-spacing: 5px;
-
-  text-shadow:
-    0 0 8px currentColor,
-    0 0 25px currentColor,
-    0 0 50px currentColor;
-}
-
-.diagnosis-vibe {
-  margin: 16px 0 25px;
-
-  font-size: 10px;
-  letter-spacing: 5px;
-
-  opacity: 0.6;
-}
-
-.diagnosis-evidence {
-  width: min(650px, 100%);
-
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 12px;
-
-  margin-bottom: 24px;
-}
-
-.diagnosis-evidence div {
-  padding: 16px 10px;
-
-  border: 1px solid currentColor;
-
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.diagnosis-evidence strong {
-  font-size: 28px;
-
-  text-shadow:
-    0 0 8px currentColor;
-}
-
-.diagnosis-evidence span {
-  font-size: 9px;
-  letter-spacing: 2px;
-
-  opacity: 0.55;
-}
-
-.diagnosis-message {
-  width: min(650px, 100%);
-
-  padding: 18px 22px;
-
-  border: 1px solid currentColor;
-}
-
-.diagnosis-message p {
-  margin: 0;
-
-  font-size: 14px;
-  line-height: 1.6;
-
-  opacity: 0.85;
-}
-
-.final-roast {
-  width: min(650px, 100%);
-
-  margin-top: 15px;
-  padding: 18px 22px;
-
-  border: 1px solid currentColor;
-
-  text-align: left;
-}
-
-.final-roast span {
-  font-size: 9px;
-  letter-spacing: 3px;
-
-  opacity: 0.55;
-}
-
-.final-roast p {
-  margin: 10px 0 0;
-
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.diagnosis-closing {
-  max-width: 600px;
-
-  margin: 18px 0 0;
-
-  font-size: 13px;
-  line-height: 1.5;
-
-  opacity: 0.7;
-}
-
-.diagnosis-footer {
-  margin-top: auto;
-  margin-bottom: 18px;
-
-  font-size: 10px;
-  letter-spacing: 4px;
-
-  opacity: 0.5;
-}
-
-.wrapped-next-button {
-  padding: 14px 30px;
-
-  background: transparent;
-  border: 1px solid currentColor;
-
-  font-family: inherit;
-  font-size: 14px;
-  letter-spacing: 2px;
-
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: #0f0c1b;
   cursor: pointer;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.wrapped-next-button:hover {
-  transform: translateY(-2px);
+/* =====================================================
+   POSTER CARD — BRIGHT SPOTIFY WRAPPED PALETTE
+===================================================== */
+.diagnosis-poster {
+  --periwinkle: #a5a9fe;
+  --periwinkle-light: #c0c3ff;
+  --lime: #ddff31;
+  --hot-orange: #ff5500;
+  --purple: #6b25d2;
+  --black: #080808;
+  --white: #ffffff;
+
+  position: relative;
+  width: min(96vw, 1600px);
+  height: min(92vh, 900px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3cqw 3.8cqw;
+  box-sizing: border-box;
+
+  /* Bright Periwinkle Base matching the inspo photo */
+  background: linear-gradient(165deg, #b0b4ff 0%, #a2a6ff 60%, #c8baff 100%);
+  color: var(--black);
+  border-radius: 20px;
+  overflow: hidden;
 
   box-shadow:
-    0 0 10px currentColor,
-    0 0 25px currentColor;
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(255, 255, 255, 0.4);
+
+  animation: poster-in 650ms cubic-bezier(.16,1,.3,1) both;
+  container-type: inline-size;
 }
 
-@media (max-width: 700px) {
-  .final-diagnosis-screen {
-    padding: 12px;
+/* Texture Grain */
+.poster-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: .12;
+  background-image:
+    radial-gradient(circle, rgba(0,0,0,.25) 0 .6px, transparent .8px),
+    radial-gradient(circle, rgba(255,255,255,.2) 0 .5px, transparent .75px);
+  background-size: 6px 6px, 8px 8px;
+  mix-blend-mode: multiply;
+}
+
+/* =====================================================
+   INSPO GRAPHICS: HEATMAP RINGS & LIQUID BLOBS
+===================================================== */
+/* Glowing Heatmap Rings at Top Right Center */
+.wrapped-halo {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.halo-outer {
+  width: 42cqw;
+  height: 18cqw;
+  top: 2%;
+  right: 15%;
+  background: radial-gradient(ellipse, rgba(255,85,0,0.85) 0%, rgba(221,255,49,0.9) 50%, transparent 75%);
+  filter: blur(20px);
+  transform: rotate(-15deg);
+}
+
+.halo-inner {
+  width: 32cqw;
+  height: 12cqw;
+  top: 5%;
+  right: 20%;
+  background: radial-gradient(ellipse, #ffffff 0%, #ddff31 60%, transparent 80%);
+  filter: blur(12px);
+  transform: rotate(-15deg);
+}
+
+.wrapped-halo-center {
+  position: absolute;
+  top: -10%;
+  right: 18%;
+  width: 25cqw;
+  height: 25cqw;
+  background: #ddff31;
+  filter: blur(50px);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pixel Art Swoosh */
+.pixel-swoosh-svg {
+  position: absolute;
+  left: 2cqw;
+  bottom: 12cqw;
+  width: 28cqw;
+  height: 12cqw;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+/* Glassy Liquid Blobs at Bottom */
+.liquid-blob {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  filter: blur(8px);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.blob-a {
+  width: 14cqw;
+  height: 14cqw;
+  bottom: -2cqw;
+  right: 12cqw;
+  background: linear-gradient(135deg, rgba(221,255,49,0.7), rgba(255,85,0,0.4));
+}
+
+.blob-b {
+  width: 8cqw;
+  height: 8cqw;
+  bottom: 3cqw;
+  right: 8cqw;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(165,169,254,0.5));
+}
+
+/* =====================================================
+   HEADER BAR
+===================================================== */
+.poster-top {
+  display: flex;
+  align-items: center;
+  gap: 1.25cqw;
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85cqw, 14px);
+  font-weight: 900;
+  letter-spacing: .09em;
+  z-index: 25;
+  color: var(--black);
+}
+
+.poster-logo,
+.poster-mode {
+  white-space: nowrap;
+}
+
+.poster-top-rule {
+  flex: 1;
+  height: 2px;
+  background: var(--black);
+}
+
+/* =====================================================
+   POSTER BODY & HERO TYPOGRAPHY
+===================================================== */
+.poster-body {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5cqw;
+  margin: auto 0;
+}
+
+.hero-eyebrow {
+  display: block;
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85cqw, 13px);
+  font-weight: 900;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 0.2cqw;
+}
+
+/* Bold Heavy Inspo Title */
+.diagnosis-main-title {
+  margin: 0;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(40px, 6.8cqw, 105px);
+  line-height: .86;
+  letter-spacing: -.03em;
+  font-weight: 950;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+.vibe-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.8cqw;
+  padding: 0.4cqw 1cqw;
+  background: var(--black);
+  color: var(--lime);
+  border-radius: 4px;
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85cqw, 13px);
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+/* =====================================================
+   STATS ROW
+===================================================== */
+.poster-stats-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.4cqw;
+  margin-top: 0.5cqw;
+}
+
+.stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5cqw;
+}
+
+.stat-number {
+  font-family: "Arial Black", Impact, sans-serif;
+  font-size: clamp(32px, 3.8cqw, 62px);
+  font-weight: 950;
+  color: var(--black);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85cqw, 13px);
+  font-weight: 900;
+  letter-spacing: .1em;
+  color: var(--black);
+}
+
+.stat-sep {
+  font-family: "Courier New", monospace;
+  font-size: clamp(18px, 1.8cqw, 28px);
+  font-weight: 900;
+  color: var(--purple);
+}
+
+/* =====================================================
+   DESCRIPTION & EDITORIAL ROAST STICKER
+===================================================== */
+.poster-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1cqw;
+  max-width: 82%;
+}
+
+.personality-desc {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: clamp(12px, 1.1cqw, 17px);
+  line-height: 1.4;
+  font-weight: 800;
+  color: var(--black);
+}
+
+/* Clean Editorial Sticker Box */
+.roast-sticker {
+  background: var(--white);
+  border: 2px solid var(--black);
+  padding: 1cqw 1.4cqw;
+  box-shadow: 4px 4px 0 var(--black);
+  border-radius: 6px;
+}
+
+.roast-lbl {
+  display: inline-block;
+  font-family: "Courier New", monospace;
+  font-size: clamp(9px, 0.7cqw, 11px);
+  font-weight: 900;
+  letter-spacing: .1em;
+  background: var(--purple);
+  color: var(--lime);
+  padding: 0.2cqw 0.6cqw;
+  margin-bottom: 0.4cqw;
+}
+
+.roast-body {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: clamp(11px, 0.95cqw, 15px);
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* =====================================================
+   FOOTER BAR
+===================================================== */
+.poster-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2cqw;
+  z-index: 25;
+  padding-top: 1cqw;
+  border-top: 2px solid var(--black);
+}
+
+.bottom-note {
+  font-family: "Courier New", monospace;
+  font-size: clamp(9px, 0.75cqw, 12px);
+  font-weight: 900;
+  letter-spacing: .05em;
+  color: var(--black);
+  max-width: 65%;
+}
+
+.wrapped-save-btn {
+  padding: 0.8cqw 1.6cqw;
+  background: var(--lime);
+  color: var(--black);
+  border: 2px solid var(--black);
+  box-shadow: 3px 3px 0 var(--black);
+  font-family: "Courier New", monospace;
+  font-size: clamp(10px, 0.85cqw, 13px);
+  font-weight: 900;
+  letter-spacing: .1em;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+  white-space: nowrap;
+}
+
+.wrapped-save-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--black);
+  background: #e8ff66;
+}
+
+/* =====================================================
+   MOBILE / RESPONSIVE
+===================================================== */
+@media (max-width: 768px) {
+  .diagnosis-poster {
+    width: 96vw;
+    height: 96vh;
+    padding: 20px 16px;
   }
 
-  .final-diagnosis-content {
-    padding: 30px 18px 22px;
+  .poster-stats-row {
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
-  .diagnosis-evidence {
-    grid-template-columns: 1fr;
+  .stat-sep {
+    display: none;
   }
 
-  .diagnosis-title {
-    letter-spacing: 2px;
+  .poster-text-block {
+    max-width: 100%;
   }
+
+  .poster-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .wrapped-save-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@keyframes poster-in {
+  from { opacity: 0; transform: scale(.98); }
+  to { opacity: 1; transform: scale(1); }
 }
